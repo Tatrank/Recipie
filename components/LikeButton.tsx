@@ -7,7 +7,7 @@ export default function LikeButton({
 }: {
   UserID: string;
   NumberLikes: number;
-  RecipeID: String;
+  RecipeID: string;
 }) {
   return (
     <Box

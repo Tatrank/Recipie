@@ -25,7 +25,7 @@ export async function GET(req: Request) {
           User: { connect: { id: userID } },
         },
       });
-      return NextResponse.json("like přídán");
     }
+    return NextResponse.json({ name: "like přídán" });
   }
 }
