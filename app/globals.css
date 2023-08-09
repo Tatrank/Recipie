@@ -1,0 +1,21 @@
+html {
+  background-color: black;
+}
+
+.main-container {
+  display: flex;
+  width: 100%;
+  min-height: 100%;
+  height: fit-content;
+  background: black;
+  justify-content: center;
+}
+
+.container {
+  display: flex;
+  padding: 5rem;
+  width: 90rem;
+  height: 100%;
+  flex-direction: row;
+  gap: 5rem;
+}
