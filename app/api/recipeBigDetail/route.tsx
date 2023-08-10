@@ -10,6 +10,7 @@ export async function GET(request: Request) {
         likes: true,
         groceries_measueres: true,
         user: true,
+        comments: { include: { User: true } },
       },
       where: { id: id },
     });

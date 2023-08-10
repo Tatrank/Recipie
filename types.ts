@@ -1,6 +1,10 @@
 import { User } from "next-auth";
 
 export type FullRecepi = {
+  image_url: string;
+  image_key: string;
+  description: string;
+  time_difficulty: string;
   id: string;
   name: string;
   difficulty: string;
@@ -8,9 +12,18 @@ export type FullRecepi = {
   userId: string;
   published: string;
   likes: Like[];
+  comments: Comments[];
   categories: CategoriesType[];
   groceries_measueres: Groceries_measueres[];
   user: UserType;
+};
+
+export type Comments = {
+  id: string;
+  text: string;
+  UserId: string;
+  recipeId: string;
+  User: UserType;
 };
 
 export type Groceries_measueres = {

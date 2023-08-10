@@ -18,6 +18,7 @@
     "@types/node": "20.4.2",
     "@types/react": "18.2.15",
     "@types/react-dom": "18.2.7",
+    "@uploadthing/react": "^5.2.1",
     "eslint": "8.44.0",
     "eslint-config-next": "13.4.9",
     "framer-motion": "^10.12.21",
@@ -25,7 +26,9 @@
     "next-auth": "^4.22.3",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-dropzone": "^14.2.3",
     "typescript": "5.1.6",
+    "uploadthing": "^5.3.2",
     "use-debounce": "^9.0.4"
   },
   "devDependencies": {

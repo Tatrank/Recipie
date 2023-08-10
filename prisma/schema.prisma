@@ -49,6 +49,7 @@ model User {
   role          Role      @default(user)
   recepies      recipe[]
   likes         like[]
+  comments      comment[]
 }
 
 model VerificationToken {
@@ -79,7 +80,11 @@ model measure {
 
 model recipe {
   id                  String              @id @default(uuid())
+  image_url           String              @default("https://simply-delicious-food.com/wp-content/uploads/2018/07/mexican-lunch-bowls-6.jpg")
+  image_key           String?
   name                String
+  description         String
+  time_diffiulty      String
   difficulty          String?
   disclaimer          String
   user                User?               @relation(fields: [userId], references: [id])
@@ -88,10 +93,20 @@ model recipe {
   categories          category[]
   groceries_measueres groceries_mesaure[]
   likes               like[]
+  comments            comment[]
 }
 
 model like {
   id       String  @id @default(uuid())
+  recipe   recipe? @relation(fields: [recipeId], references: [id])
+  recipeId String?
+  User     User?   @relation(fields: [userId], references: [id])
+  userId   String?
+}
+
+model comment {
+  id       String  @id @default(uuid())
+  text     String
   recipe   recipe? @relation(fields: [recipeId], references: [id])
   recipeId String?
   User     User?   @relation(fields: [userId], references: [id])

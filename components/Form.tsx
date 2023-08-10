@@ -2,12 +2,19 @@
 import React, { useEffect, useState } from "react";
 import { Box, Button, FormControl, FormLabel, Input } from "@chakra-ui/react";
 import { signIn, signOut, useSession } from "next-auth/react";
-
+import "@uploadthing/react/styles.css";
+import { UploadButton } from "@/lib/uploadthing";
+import { utapi } from "uploadthing/server";
 export default function Form() {
   const { data: session, status } = useSession();
+  const [useableUpload, setUseableUpload] = useState(true);
   const [formData, setFormData] = useState({
     name: "",
     difficulty: "",
+    description: "",
+    time_difficulty: "",
+    image_url: "",
+    image_key: "",
     stepByStep: "",
     category: [""],
     groceries_measueres: [["", ""]],
@@ -19,7 +26,6 @@ export default function Form() {
     }));
   }, [session?.user?.email]);
 
-  const [data, setData] = useState("");
   async function handleSubmit() {
     try {
       const response = await fetch("http://localhost:3000/api/create", {
@@ -33,7 +39,7 @@ export default function Form() {
 
       if (response.ok) {
         const res = await response.json();
-        setData(res);
+
         console.log(res);
       } else {
         console.error("Error adding recipe");
@@ -98,13 +104,68 @@ export default function Form() {
             placeholder="Enter your name"
           />
         </FormControl>
+        {useableUpload ? (
+          <UploadButton
+            endpoint="imageUploader"
+            onClientUploadComplete={(res) => {
+              // Do something with the response
+              console.log(res);
+              setUseableUpload(false);
+              if (res)
+                setFormData((prevData) => ({
+                  ...prevData,
+                  image_url: res[0].url,
+                  image_key: res[0].key,
+                }));
+            }}
+            onUploadError={(error: Error) => {
+              // Do something with the error.
+              alert(`ERROR! ${error.message}`);
+            }}
+          />
+        ) : (
+          <>
+            <img src={formData.image_url}></img>
+            <Button
+              onClick={async () => {
+                await fetch(
+                  `http://localhost:3000/api/deleteImage?imageId=${formData.image_key}`,
+                  { method: "DELETE" }
+                );
+                setUseableUpload(true);
+              }}
+            >
+              změnit obrázek
+            </Button>
+          </>
+        )}
 
+        <FormControl mt={4}>
+          <FormLabel>Description</FormLabel>
+          <Input
+            type="text"
+            name="description"
+            value={formData.description}
+            onChange={handleInputChange}
+            placeholder="Enter difficulty of meal"
+          />
+        </FormControl>
         <FormControl mt={4}>
           <FormLabel>Difficulty</FormLabel>
           <Input
             type="text"
             name="difficulty"
             value={formData.difficulty}
+            onChange={handleInputChange}
+            placeholder="Enter difficulty of meal"
+          />
+        </FormControl>
+        <FormControl>
+          <FormLabel>Time difficulty</FormLabel>
+          <Input
+            type="text"
+            name="time_difficulty"
+            value={formData.time_difficulty}
             onChange={handleInputChange}
             placeholder="Enter difficulty of meal"
           />
