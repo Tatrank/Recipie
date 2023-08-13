@@ -149,9 +149,9 @@ export default async function page({
                       {item.User.name}
                     </div>
                   </div>
-                  {session?.user?.email == item.User.name ? (
+                  {session?.user?.email == item.User.email ? (
                     <div className="p-4 bg-background-dark rounded-3xl text-3xl hover:cursor-pointer">
-                      Smazat
+                      <RemoveComment commentId={item.id}></RemoveComment>
                     </div>
                   ) : (
                     <div></div>

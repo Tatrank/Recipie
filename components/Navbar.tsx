@@ -1,5 +1,5 @@
 "use client";
-import { Flex, ChakraProvider, Box } from "@chakra-ui/react";
+
 import Dropdown from "./Dropdown";
 import { SearchBar } from "./SearchBar";
 import { signIn, signOut, useSession } from "next-auth/react";

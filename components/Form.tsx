@@ -1,15 +1,30 @@
 "use client";
+// components/Form.tsx
+
 import React, { useEffect, useState } from "react";
-import { Box, Button, FormControl, FormLabel, Input } from "@chakra-ui/react";
+import TextareaAutosize from "react-textarea-autosize";
 import { signIn, signOut, useSession } from "next-auth/react";
-import "@uploadthing/react/styles.css";
-import { UploadButton } from "@/lib/uploadthing";
 import { useRouter } from "next/navigation";
-export default function Form() {
-  const router = useRouter();
+import { UploadButton } from "@/lib/uploadthing";
+import "@uploadthing/react/styles.css";
+
+interface FormData {
+  name: string;
+  difficulty: string;
+  description: string;
+  time_difficulty: string;
+  image_url: string;
+  image_key: string;
+  stepByStep: string;
+  category: string[];
+  groceries_measueres: [string, string][];
+}
+
+export default function Form(): JSX.Element {
   const { data: session, status } = useSession();
+  const router = useRouter();
   const [useableUpload, setUseableUpload] = useState(true);
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormData>({
     name: "",
     difficulty: "",
     description: "",
@@ -21,6 +36,7 @@ export default function Form() {
     category: [""],
     groceries_measueres: [["", ""]],
   });
+
   useEffect(() => {
     setFormData((prevData) => ({
       ...prevData,
@@ -28,7 +44,15 @@ export default function Form() {
     }));
   }, [session?.user?.email]);
 
-  async function handleSubmit() {
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+
+    // Check if any required input fields are empty
+    if (formData.name === "" || formData.difficulty === "") {
+      alert("Please fill in required fields.");
+      return;
+    }
+
     try {
       const response = await fetch("http://localhost:3000/api/create", {
         method: "POST",
@@ -53,20 +77,21 @@ export default function Form() {
     }
   }
 
-  const handleInputChange = (e: any) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
     const { name, value } = e.target;
 
-    if (name?.split("_")[0] == "category") {
-      let copyData = formData.category;
-      copyData[parseInt(name.split("_")[1]) as number] = value;
+    if (name?.split("_")[0] === "category") {
+      let copyData = [...formData.category];
+      copyData[parseInt(name.split("_")[1])] = value;
       setFormData((prevData) => ({ ...prevData, category: copyData }));
     } else if (
-      name?.split("_")[0] == "value" ||
-      name?.split("_")[0] == "grocery"
+      name?.split("_")[0] === "value" ||
+      name?.split("_")[0] === "grocery"
     ) {
-      let copyData = formData.groceries_measueres;
+      let copyData = [...formData.groceries_measueres];
 
-      if (name?.split("_")[0] == "grocery") {
+      if (name?.split("_")[0] === "grocery") {
         copyData[parseInt(name.split("_")[1])][0] = value;
       } else {
         copyData[parseInt(name.split("_")[1])][1] = value;
@@ -78,8 +103,9 @@ export default function Form() {
       }));
     } else setFormData((prevData) => ({ ...prevData, [name]: value }));
   };
+
   function addCategory(index: number) {
-    if (index + 1 == formData.category.length) {
+    if (index + 1 === formData.category.length) {
       setFormData((prevData) => ({
         ...prevData,
         category: [...formData.category, ""],
@@ -88,31 +114,33 @@ export default function Form() {
   }
 
   function addGroceriesAndMesuerements(index: number) {
-    if (index + 1 == formData.groceries_measueres.length) {
+    if (index + 1 === formData.groceries_measueres.length) {
       setFormData((prevData) => ({
         ...prevData,
         groceries_measueres: [...formData.groceries_measueres, ["", ""]],
       }));
     }
   }
+
   return (
-    <Box p={4}>
-      <form>
-        <FormControl isRequired>
-          <FormLabel>Name</FormLabel>
-          <Input
+    <div className="p-4 w-[1000px]">
+      <div>
+        <div className="mb-4">
+          <label className="block font-bold">Jméno</label>
+          <input
             type="text"
             name="name"
             value={formData.name}
             onChange={handleInputChange}
-            placeholder="Enter your name"
+            placeholder="Zadejejte svoje jméno"
+            className="w-full p-2 border border-gray-300 rounded"
+            required
           />
-        </FormControl>
+        </div>
         {useableUpload ? (
           <UploadButton
             endpoint="imageUploader"
             onClientUploadComplete={(res) => {
-              // Do something with the response
               console.log(res);
               setUseableUpload(false);
               if (res)
@@ -123,14 +151,13 @@ export default function Form() {
                 }));
             }}
             onUploadError={(error: Error) => {
-              // Do something with the error.
               alert(`ERROR! ${error.message}`);
             }}
           />
         ) : (
           <>
-            <img src={formData.image_url}></img>
-            <Button
+            <img src={formData.image_url} alt="Recipe" />
+            <button
               onClick={async () => {
                 await fetch(
                   `http://localhost:3000/api/deleteImage?imageId=${formData.image_key}`,
@@ -138,103 +165,116 @@ export default function Form() {
                 );
                 setUseableUpload(true);
               }}
+              className="mt-2 px-4 py-2 text-white bg-blue-500 rounded"
             >
               Změnit obrázek
-            </Button>
+            </button>
           </>
         )}
 
-        <FormControl mt={4}>
-          <FormLabel>Description</FormLabel>
-          <Input
-            type="text"
+        <div className="mt-4">
+          <label className="block font-bold">Description</label>
+          <TextareaAutosize
             name="description"
             value={formData.description}
-            onChange={handleInputChange}
+            onChange={(e) => {
+              const { value, name } = e.target;
+              setFormData((prevData) => ({ ...prevData, [name]: value }));
+            }}
             placeholder="Enter difficulty of meal"
+            className="w-full p-2 border border-gray-300 rounded"
+            required
           />
-        </FormControl>
-        <FormControl mt={4}>
-          <FormLabel>Difficulty</FormLabel>
-          <Input
+        </div>
+        <div className="mt-4">
+          <label className="block font-bold">Difficulty</label>
+          <input
             type="text"
             name="difficulty"
             value={formData.difficulty}
             onChange={handleInputChange}
             placeholder="Enter difficulty of meal"
+            className="w-full p-2 border border-gray-300 rounded"
+            required
           />
-        </FormControl>
-        <FormControl>
-          <FormLabel>Time difficulty</FormLabel>
-          <Input
+        </div>
+        <div className="mt-4">
+          <label className="block font-bold">Time difficulty</label>
+          <input
             type="text"
             name="time_difficulty"
             value={formData.time_difficulty}
             onChange={handleInputChange}
-            placeholder="Enter difficulty of meal"
+            placeholder="Enter time difficulty of meal"
+            className="w-full p-2 border border-gray-300 rounded"
+            required
           />
-        </FormControl>
-        <FormControl mt={4}>
-          <FormLabel>Step by step</FormLabel>
-          <Input
-            type="text"
+        </div>
+        <div className="mt-4">
+          <label className="block font-bold">Step by step</label>
+          <TextareaAutosize
+            className="w-full min-h-[15rem] bg-background-dark rounded border-white bg-opacity-0 p-2"
             name="stepByStep"
             value={formData.stepByStep}
-            onChange={handleInputChange}
+            onChange={(e) => {
+              const { value, name } = e.target;
+              setFormData((prevData) => ({ ...prevData, [name]: value }));
+            }}
             placeholder="Enter step by step of cooking the meal"
+            required
           />
-        </FormControl>
-        {formData.category.map((item, index) => {
-          return (
-            <FormControl mt={4} key={index}>
-              <FormLabel>Category {index + 1}</FormLabel>
-              <Input
-                type="text"
-                name={`category_${index}`}
-                value={formData.category[index]}
-                onChange={handleInputChange}
-                placeholder="Category"
-                onClick={() => {
-                  addCategory(index);
-                }}
-              />
-            </FormControl>
-          );
-        })}
-        {formData.groceries_measueres.map((item, index) => {
-          return (
-            <>
-              {" "}
-              <FormControl mt={4} display={"inline"} key={index + 0}>
-                <FormLabel>Grocery {index + 1}</FormLabel>
-                <Input
-                  type="text"
-                  name={`grocery_${index}`}
-                  value={formData.groceries_measueres[index][0]}
-                  onChange={handleInputChange}
-                  placeholder="Category"
-                  onClick={() => {
-                    addGroceriesAndMesuerements(index);
-                  }}
-                />
-              </FormControl>
-              <FormControl mt={4} display={"inline"} key={index + 1}>
-                <FormLabel>Value {index + 1}</FormLabel>
-                <Input
-                  type="text"
-                  name={`value_${index}`}
-                  value={formData.groceries_measueres[index][1]}
-                  onChange={handleInputChange}
-                  placeholder="Category"
-                />
-              </FormControl>
-            </>
-          );
-        })}
-        <Button onClick={handleSubmit} mt={4} colorScheme="teal">
+        </div>
+        {formData.category.map((item, index) => (
+          <div className="mt-4" key={index}>
+            <label className="block font-bold">Category {index + 1}</label>
+            <input
+              type="text"
+              name={`category_${index}`}
+              value={formData.category[index]}
+              onChange={handleInputChange}
+              placeholder="Category"
+              onClick={() => {
+                addCategory(index);
+              }}
+              className="w-full p-2 border border-gray-300 rounded"
+              required
+            />
+          </div>
+        ))}
+        {formData.groceries_measueres.map((item, index) => (
+          <div className="mt-4" key={index}>
+            <label className="block font-bold">Grocery {index + 1}</label>
+            <input
+              type="text"
+              name={`grocery_${index}`}
+              value={formData.groceries_measueres[index][0]}
+              onChange={handleInputChange}
+              placeholder="Grocery"
+              onClick={() => {
+                addGroceriesAndMesuerements(index);
+              }}
+              className="w-full p-2 border border-gray-300 rounded"
+              required
+            />
+            <label className="block font-bold">Value {index + 1}</label>
+            <input
+              type="text"
+              name={`value_${index}`}
+              value={formData.groceries_measueres[index][1]}
+              onChange={handleInputChange}
+              placeholder="Value"
+              className="w-full p-2 mt-2 border border-gray-300 rounded"
+              required
+            />
+          </div>
+        ))}
+        <button
+          onClick={handleSubmit}
+          className="mt-4 px-4 py-2 text-white bg-teal-500 rounded"
+        >
           Submit
-        </Button>
-      </form>
-    </Box>
+        </button>
+      </div>
+    </div>
   );
 }

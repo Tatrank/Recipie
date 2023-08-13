@@ -1,5 +1,7 @@
 "use client";
+import { useRouter } from "next/navigation";
 export default function RemoveComment({ commentId }: { commentId: string }) {
+  const router = useRouter();
   return (
     <>
       <div
@@ -10,9 +12,10 @@ export default function RemoveComment({ commentId }: { commentId: string }) {
               method: "DELETE",
             }
           );
+          router.refresh();
         }}
       >
-        Smazat komment
+        Smazat komentář
       </div>
     </>
   );

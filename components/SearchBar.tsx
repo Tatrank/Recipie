@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { Input } from "@chakra-ui/react";
+
 import { useRouter } from "next/navigation";
 import { useDebounce } from "use-debounce";
 import { Magnyfing_glass } from "./Icons";
