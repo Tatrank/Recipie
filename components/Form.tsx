@@ -4,8 +4,9 @@ import { Box, Button, FormControl, FormLabel, Input } from "@chakra-ui/react";
 import { signIn, signOut, useSession } from "next-auth/react";
 import "@uploadthing/react/styles.css";
 import { UploadButton } from "@/lib/uploadthing";
-import { utapi } from "uploadthing/server";
+import { useRouter } from "next/navigation";
 export default function Form() {
+  const router = useRouter();
   const { data: session, status } = useSession();
   const [useableUpload, setUseableUpload] = useState(true);
   const [formData, setFormData] = useState({
@@ -13,7 +14,8 @@ export default function Form() {
     difficulty: "",
     description: "",
     time_difficulty: "",
-    image_url: "",
+    image_url:
+      "https://simply-delicious-food.com/wp-content/uploads/2018/07/mexican-lunch-bowls-6.jpg",
     image_key: "",
     stepByStep: "",
     category: [""],
@@ -39,9 +41,11 @@ export default function Form() {
 
       if (response.ok) {
         const res = await response.json();
-
-        console.log(res);
+        router.push(
+          `http://localhost:3000/recipe/${res.categories[0].name}/${res.name}/${res.id}`
+        );
       } else {
+        alert("něco se nepovedlo");
         console.error("Error adding recipe");
       }
     } catch (error) {
@@ -135,7 +139,7 @@ export default function Form() {
                 setUseableUpload(true);
               }}
             >
-              změnit obrázek
+              Změnit obrázek
             </Button>
           </>
         )}

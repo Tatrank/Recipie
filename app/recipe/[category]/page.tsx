@@ -22,16 +22,16 @@ export default async function Page({
   );
   const json: FullRecepi[] = await data.json();
   return (
-    <div className="main-container">
-      <div className="container">
-        {json.map((item: FullRecepi) => (
+    <div className="flex flex-wrap justify-center h-fit w-9/10">
+      {json.map((item: FullRecepi) => (
+        <div className="w-fit m-20 h-fit">
           <Link
             href={`http://localhost:3000/recipe/${item.categories[0].name}/${item.name}/${item.id}`}
           >
-            <RecepiCard data={item}></RecepiCard>´
+            <RecepiCard data={item}></RecepiCard>
           </Link>
-        ))}
-      </div>
+        </div>
+      ))}
     </div>
   );
 }

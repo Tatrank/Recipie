@@ -84,8 +84,8 @@ model recipe {
   image_key           String?
   name                String
   description         String
-  time_diffiulty      String
-  difficulty          String?
+  time_difficulty     String?             @default("nezadáno")
+  difficulty          String?             @default("nezadáno")
   disclaimer          String
   user                User?               @relation(fields: [userId], references: [id])
   userId              String?

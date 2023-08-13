@@ -1,5 +1,5 @@
-import { db } from "@/lib/db";
 import { NextResponse } from "next/server";
+import { db } from "@/lib/db";
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
   const userMail = searchParams.get("userID");
@@ -21,15 +21,9 @@ export async function GET(req: Request) {
       select: { id: true },
     });
     if (exists) {
-      await db.like.delete({ where: exists });
+      return NextResponse.json({ value: true });
     } else {
-      await db.like.create({
-        data: {
-          recipe: { connect: { id: recipeID } },
-          User: { connect: userID! },
-        },
-      });
+      return NextResponse.json({ value: false });
     }
-    return NextResponse.json("like přídán");
   }
 }

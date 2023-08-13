@@ -23,11 +23,11 @@ export async function DELETE(req: Request) {
   if (query) {
     const id = await db.recipe.delete({
       where: { id: query },
-      select: { image_key: true },
+      select: { image_key: true, id: true },
     });
     if (id.image_key) {
       await utapi.deleteFiles(id.image_key);
     }
   }
-  return NextResponse.json("");
+  return NextResponse.json("deleted");
 }

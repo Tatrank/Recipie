@@ -124,7 +124,7 @@ export async function POST(req: Request) {
       disclaimer: data.stepByStep,
       name: data.name,
       description: data.description,
-      time_diffiulty: data.time_difficulty,
+      time_difficulty: data.time_difficulty,
       image_key: data.image_key,
       image_url: data.image_url,
       categories: { connect: categoryIDs },

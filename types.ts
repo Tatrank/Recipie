@@ -30,6 +30,18 @@ export type Groceries_measueres = {
   id: string;
   groceryId: string;
   measureId: string;
+  grocery: Grocery;
+  measure: Measure;
+};
+
+export type Grocery = {
+  id: string;
+  name: string;
+};
+
+export type Measure = {
+  id: string;
+  value: string;
 };
 
 export type CategoriesType = {

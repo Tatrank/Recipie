@@ -6,5 +6,5 @@ import Navbar from "@/components/Navbar";
 const inter = Inter({ subsets: ["latin"] });
 
 export default async function Page() {
-  return <>dfassfd</>;
+  return <div className="h-[5000px]">fdasf dafds dsfa</div>;
 }

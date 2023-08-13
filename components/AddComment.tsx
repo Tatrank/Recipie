@@ -1,14 +1,19 @@
 "use client";
 import React, { useState } from "react";
-import { Box, Button, FormControl, FormLabel, Input } from "@chakra-ui/react";
-
+import { useRouter } from "next/navigation";
+import TextareaAutosize from "react-textarea-autosize";
 export default function AddComment({
   recipe,
   user,
+  userName,
+  userImage,
 }: {
   recipe: string;
   user: string;
+  userName: string;
+  userImage: string;
 }) {
+  const router = useRouter();
   const [data, setData] = useState({
     commentText: "",
     commentRecipe: recipe,
@@ -31,38 +36,43 @@ export default function AddComment({
 
       if (response.ok) {
         console.log("Comment added successfully");
-        // Reset form or handle success in your application
+        router.refresh();
       } else {
-        console.error("Error adding comment");
+        alert("někde nastala chyba");
       }
     } catch (error) {
       console.error("An error occurred:", error);
     }
   };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setData((prevData) => ({ ...prevData, [name]: value }));
-  };
-
   return (
-    <Box p={4}>
-      <form>
-        <FormControl isRequired>
-          <FormLabel>Comment Text</FormLabel>
-          <Input
-            type="text"
-            name="commentText"
-            value={data.commentText}
-            onChange={handleInputChange}
-            placeholder="Enter comment text"
-          />
-        </FormControl>
-
-        <Button onClick={handleSubmit} mt={4} colorScheme="teal">
-          Add Comment
-        </Button>
-      </form>
-    </Box>
+    <div className="flex flex-wrap my-4 bg-primary-dark w-full p-5 h-fit rounded-3xl">
+      <div className="flex mb-3 w-full justify-between items-center">
+        <div className=" flex justify-between justify-items-center items-center h-14 w-[14rem] overflow-hidden">
+          <div></div>
+          <div className="border absolute z-10 rounded-full border-secondary-dark">
+            <img className="w-12 h-12 rounded-full " src={userImage}></img>
+          </div>
+          <div className="w-[13rem]  h-9 flex justify-end p-3 rounded-2xl z-0 text-lg items-center bg-background-dark">
+            {userName}
+          </div>
+        </div>
+        <div
+          className="p-4 bg-background-dark rounded-3xl text-3xl hover:cursor-pointer"
+          onClick={handleSubmit}
+        >
+          Send
+        </div>
+      </div>
+      <TextareaAutosize
+        onChange={(e) => {
+          const { name, value } = e.target;
+          setData((prevData) => ({ ...prevData, [name]: value }));
+        }}
+        defaultValue={"Sdělte nám něco"}
+        name="commentText"
+        className="w-full min-h-[6 rem] rounded-lg text-3xl h-fit p-7 bg-background-dark "
+      ></TextareaAutosize>
+    </div>
   );
 }

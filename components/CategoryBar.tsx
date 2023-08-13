@@ -18,16 +18,26 @@ export default function CategoryBar() {
       });
   }, []);
   return (
-    <Flex position={"absolute"} top={"250px"} left={"20px"} color={"white"}>
-      <ul>
+    <div className="relative top-20">
+      <div className="flex justify-center items-center w-full h-32 border-1 border border-primary-dark dark:bg-background-dark bg-background-light text-4xl">
+        Kategorie
+      </div>
+      <div>
+        <Link href={`/all`}>
+          <div className="w-full  h-16 flex justify-center items-center border-5 border border-primary-dark dark:bg-background-dark bg-background-light text-md">
+            Vše
+          </div>
+        </Link>
         {category.map((item) => {
           return (
-            <li>
-              <Link href={`/recipe/${item.name}`}>{item.name}</Link>
-            </li>
+            <Link href={`/recipe/${item.name}`}>
+              <div className="w-full  h-16 flex justify-center items-center border-5 border border-primary-dark dark:bg-background-dark bg-background-light text-md">
+                {item.name}
+              </div>
+            </Link>
           );
         })}
-      </ul>
-    </Flex>
+      </div>
+    </div>
   );
 }

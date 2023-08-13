@@ -13,11 +13,21 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>
-        <SessionProvid>
-        <Navbar></Navbar>
-        {children}
-        </SessionProvid>
+      <body className="dark:text-text-dark text-text-light overflow-x-hidden bg-primary-dark">
+        <div className="bg-background-dark ">
+          <div className="w-[300px] h-[300px] rounded-full bg-primary-dark absolute top-[450px] right-[450px]"></div>
+          <div className="w-56 h-56 rounded-full bg-primary-dark absolute top-[500px] right-[250px]"></div>
+          <div className="w-[300px] h-[300px] rounded-full bg-primary-dark absolute top-[275px] right-[300px] "></div>
+          <div className="backdrop-filter min-h-[1440px] backdrop-blur-3xl ">
+            <div className="backdrop-filter min-h-[1440px] bg-black backdrop-blur-3xl bg-opacity-5">
+              <SessionProvid>
+                <Navbar></Navbar>
+                <div className="flex justify-center p-10">{children}</div>
+              </SessionProvid>
+            </div>
+          </div>
+        </div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.0/flowbite.min.js"></script>
       </body>
     </html>
   );

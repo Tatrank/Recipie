@@ -8,7 +8,7 @@ export async function GET(request: Request) {
       include: {
         categories: true,
         likes: true,
-        groceries_measueres: true,
+        groceries_measueres: { include: { grocery: true, measure: true } },
         user: true,
         comments: { include: { User: true } },
       },

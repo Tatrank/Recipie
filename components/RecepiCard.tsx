@@ -1,22 +1,67 @@
 "use client";
 import { Flex } from "@chakra-ui/react";
-import { motion } from "framer-motion";
+
 import { FullRecepi } from "@/types";
-import { DarkModeColors } from "@/colors/color";
+import { useState } from "react";
+import { motion } from "framer-motion";
 export default function RecepiCard({ data }: { data: FullRecepi }) {
+  const [showData, setShowData] = useState(false);
   return (
-    <Flex
-      as={motion.div}
-      wrap="wrap"
-      justifyContent="center"
-      align="center"
-      alignItems="center"
-      backgroundColor={DarkModeColors.secondary}
-      w="20rem"
-      h="27rem"
-      color={DarkModeColors.text}
+    <motion.div
+      transition={{ delay: 0.2 }}
+      initial={{ rotateY: 0 }}
+      whileHover={{ rotateY: 180 }}
+      onMouseOver={() => {
+        setTimeout(() => {
+          setShowData(true);
+        }, 200);
+      }}
+      onMouseLeave={() => {
+        setTimeout(() => {
+          setShowData(false);
+        }, 200);
+      }}
+      className="w-[400px] rounded-3xl  h-[600px] border-4 overflow-hidden"
     >
-      {data.name}
-    </Flex>
+      <div
+        style={{ backgroundImage: `url(${data.image_url})` }}
+        className="h-full w-full"
+      >
+        {!showData ? (
+          <motion.div className="flex p-4 flex-col items-center justify-between h-full w-full bg-primary-dark  backdrop-filter backdrop-blur-sm bg-opacity-50">
+            <div className="w-full h-20 p-2 text-4xl">{data.likes.length}</div>
+            <div className="flex  justify-items-center items-center w-full  p-2 text-white text-5xl">
+              {data.name}
+            </div>
+            <div
+              className=" flex justify-center items-center text-white text-md
+          w-40 h-10 bg-primary-dark rounded-2xl opacity-80"
+            >
+              {data.categories[0].name}
+            </div>
+          </motion.div>
+        ) : (
+          <div className="rotate flex p-5 flex-col justify-evenly items-center  h-full w-full bg-primary-dark  backdrop-filter backdrop-blur-sm bg-opacity-75">
+            <div className="flex  items-center text-white w-full h-1/5 p-2 text-5xl">
+              {data.name}
+            </div>
+            <div className="flex flex-col justify-between  w-full h-[28%] p-2 text-white text-5xl">
+              <div className="flex justify-center text-[2rem] items-center bg-background-light dark:bg-background-dark w-fit px-5 rounded-full h-16">
+                {data.time_difficulty}
+              </div>
+              <div className="flex justify-center text-[2rem] items-center  w-fit px-5 rounded-full h-16 bg-background-light dark:bg-background-dark ">
+                {data.difficulty}
+              </div>
+            </div>
+            <div
+              className="overflow-hidden flex   text-white text-md
+          w-full h-1/3 p-4 text-xl rounded-2xl opacity-80"
+            >
+              {data.description}
+            </div>
+          </div>
+        )}
+      </div>
+    </motion.div>
   );
 }
