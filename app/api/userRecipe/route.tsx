@@ -23,8 +23,18 @@ export async function DELETE(req: Request) {
   if (query) {
     const id = await db.recipe.delete({
       where: { id: query },
-      select: { image_key: true, id: true },
+      select: { image_key: true, id: true, comments: true, likes: true },
     });
+    const deleteComments = id.comments.map(async (item) => {
+      const commentId = await db.comment.delete({ where: { id: item.id } });
+      return commentId;
+    });
+    await Promise.all(deleteComments);
+    const deleteLikes = id.likes.map(async (item) => {
+      const LikeId = await db.like.delete({ where: { id: item.id } });
+      return LikeId;
+    });
+    await Promise.all(deleteLikes);
     if (id.image_key) {
       await utapi.deleteFiles(id.image_key);
     }

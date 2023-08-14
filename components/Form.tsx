@@ -125,7 +125,11 @@ export default function Form(): JSX.Element {
   return (
     <div className="p-4 flex justify-center w-[1000px]">
       <div className="w-full  ">
-        <div className="mb-4">
+        <motion.div
+          initial={{ scale: 0 }}
+          animate={{ scale: 1 }}
+          className="mb-4"
+        >
           <label className="block font-bold">Jméno</label>
           <input
             type="text"
@@ -137,7 +141,7 @@ export default function Form(): JSX.Element {
  bg-background-dark rounded border-secondary-dark bg-opacity-0 p-2"
             required
           />
-        </div>
+        </motion.div>
         {useableUpload ? (
           <UploadButton
             endpoint="imageUploader"
@@ -157,7 +161,12 @@ export default function Form(): JSX.Element {
           />
         ) : (
           <div className="w-full flex flex-col justify-between items-center">
-            <img src={formData.image_url} alt="Recipe" />
+            <motion.img
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              src={formData.image_url}
+              alt="Recipe"
+            />
             <motion.button
               whileHover={{ scale: 1.3 }}
               onClick={async () => {
@@ -175,7 +184,11 @@ bg-primary-dark rounded p-2 mt-2 cursor-pointer"
           </div>
         )}
 
-        <div className="mt-4">
+        <motion.div
+          initial={{ scale: 0 }}
+          animate={{ scale: 1 }}
+          className="mt-4"
+        >
           <label className="block font-bold">Description</label>
           <TextareaAutosize
             name="description"
@@ -188,8 +201,12 @@ bg-primary-dark rounded p-2 mt-2 cursor-pointer"
             className="w-full min-h-[10rem] bg-background-dark rounded border-secondary-dark bg-opacity-0 p-2"
             required
           />
-        </div>
-        <div className="mt-4">
+        </motion.div>
+        <motion.div
+          initial={{ scale: 0 }}
+          animate={{ scale: 1 }}
+          className="mt-4"
+        >
           <label className="block font-bold">Difficulty</label>
           <input
             type="text"
@@ -201,8 +218,12 @@ bg-primary-dark rounded p-2 mt-2 cursor-pointer"
  bg-background-dark rounded border-secondary-dark bg-opacity-0 p-2"
             required
           />
-        </div>
-        <div className="mt-4">
+        </motion.div>
+        <motion.div
+          initial={{ scale: 0 }}
+          animate={{ scale: 1 }}
+          className="mt-4"
+        >
           <label className="block font-bold">Time difficulty</label>
           <input
             type="text"
@@ -214,8 +235,12 @@ bg-primary-dark rounded p-2 mt-2 cursor-pointer"
  bg-background-dark rounded border-secondary-dark bg-opacity-0 p-2"
             required
           />
-        </div>
-        <div className="mt-4">
+        </motion.div>
+        <motion.div
+          initial={{ scale: 0 }}
+          animate={{ scale: 1 }}
+          className="mt-4"
+        >
           <label className="block font-bold">Step by step</label>
           <TextareaAutosize
             className="w-full min-h-[15rem] bg-background-dark rounded border-secondary-dark bg-opacity-0 p-2"
@@ -228,9 +253,14 @@ bg-primary-dark rounded p-2 mt-2 cursor-pointer"
             placeholder="Enter step by step of cooking the meal"
             required
           />
-        </div>
+        </motion.div>
         {formData.category.map((item, index) => (
-          <div className="mt-4" key={index}>
+          <motion.div
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            className="mt-4"
+            key={index}
+          >
             <label className="block font-bold">Category {index + 1}</label>
             <input
               type="text"
@@ -245,10 +275,15 @@ bg-primary-dark rounded p-2 mt-2 cursor-pointer"
  bg-background-dark rounded border-secondary-dark bg-opacity-0 p-2"
               required
             />
-          </div>
+          </motion.div>
         ))}
         {formData.groceries_measueres.map((item, index) => (
-          <div className="mt-4" key={index}>
+          <motion.div
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            className="mt-4"
+            key={index}
+          >
             <label className="block font-bold">Grocery {index + 1}</label>
             <input
               type="text"
@@ -274,11 +309,11 @@ bg-primary-dark rounded p-2 mt-2 cursor-pointer"
  bg-background-dark rounded border-secondary-dark bg-opacity-0 p-2"
               required
             />
-          </div>
+          </motion.div>
         ))}
         <div className="flex justify-center w-full">
           <motion.button
-            whileHover={{ scale: 1.2 }}
+            whileHover={{ scale: 1.08 }}
             onClick={handleSubmit}
             className="mt-4 m-auto py-8  text-4xl px-16  bg-primary-dark rounded"
           >

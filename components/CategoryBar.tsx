@@ -18,8 +18,8 @@ export default function CategoryBar() {
       });
   }, []);
   return (
-    <div className="relative top-20">
-      <div className="flex justify-center items-center w-full h-32 border-1 border border-primary-dark dark:bg-background-dark bg-background-light text-4xl">
+    <div className="relative top-48 md:top-20">
+      <div className="flex justify-center items-center w-full h-32 border-1 border border-primary-dark bg-background-dark  text-4xl">
         Kategorie
       </div>
       <div>
@@ -27,7 +27,7 @@ export default function CategoryBar() {
           <motion.div
             whileTap={{ scale: 0.8 }}
             whileHover={{ scale: 1.4 }}
-            className="w-full  h-16 flex justify-center items-center border-5 border border-primary-dark dark:bg-background-dark bg-background-light text-md"
+            className="w-full  h-16 flex justify-center items-center border-5 border border-primary-dark bg-background-dark  text-md"
           >
             Vše
           </motion.div>
@@ -38,7 +38,7 @@ export default function CategoryBar() {
               <motion.div
                 whileTap={{ scale: 0.8 }}
                 whileHover={{ scale: 1.4 }}
-                className="w-full  h-16 flex justify-center items-center border-5 border border-primary-dark dark:bg-background-dark bg-background-light text-md"
+                className="w-full  h-16 flex justify-center items-center border-5 border border-primary-dark bg-background-dark  text-md"
               >
                 {item.name}
               </motion.div>

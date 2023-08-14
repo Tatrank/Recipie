@@ -16,7 +16,8 @@ export default async function Page() {
   );
   const json: FullRecepi[] = await data.json();
   return (
-    <div className="flex flex-wrap justify-center h-fit w-9/10">
+    <>
+    {json.length ?     <div className="flex flex-wrap justify-center h-fit w-9/10">
       {json.map((item: FullRecepi) => (
         <div className="w-fit  m-20 h-fit">
           <div className="flex flex-col items-center justify-between ">
@@ -29,6 +30,8 @@ export default async function Page() {
           </div>
         </div>
       ))}
-    </div>
+    </div>: <div className="text-3xl">Nic zde</div>}
+
+    </>
   );
 }

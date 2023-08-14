@@ -52,49 +52,49 @@ export default async function page({
         ></LikeButton>
       )}
       <div className=" h-full flex justify-center items-center flex-col w-full px-3 py-[20rem]  bg-black backdrop-filter backdrop-blur-xl bg-opacity-60  ">
-        <div className="w-[1300px] flex flex-col items-center   text-text-dark bg-background-dark rounded-3xl p-7 bg-opacity-40 border-2  border-secondary-dark">
-          <div className="flex justify-center items-center text-8xl">
+        <div className="md:w-[1300px] w-full flex flex-col items-center   text-text-dark bg-background-dark rounded-3xl p-7 bg-opacity-40 border-2  border-secondary-dark">
+          <div className="flex justify-center items-center text-6xl md:text-8xl">
             {json.name}
           </div>
-          <div className="flex flex-wrap  justify-between justify-items-center items-center w-full h-52 my-10 ">
-            <div className="bg-primary-light h-20 flex justify-between rounded-full w-[600px]">
-              <div className="px-4 flex justify-center items-center w-fit min-w-[8rem] h-full rounded-full bg-background-dark text-3xl">
+          <div className="flex flex-wrap  justify-between justify-items-center items-center w-full h-fit md:h-52 my-10 ">
+            <div className="bg-primary-light h-10 md:h-20 my-4 md:my-0 flex justify-between rounded-full w-[600px]">
+              <div className="px-4 flex justify-center items-center w-fit min-w-[8rem] h-full rounded-full bg-background-dark text-xl md:text-3xl">
                 Přidal
               </div>
-              <div className="flex justify-center items-center px-5 text-3xl">
+              <div className="flex justify-center items-center px-5  text-xl md:text-3xl">
                 <Link href={`/recipe/user/public/${mail}`}>
                   {" "}
                   {json.user.name}
                 </Link>
               </div>
             </div>
-            <div className="bg-primary-light h-20 flex justify-between rounded-full w-[600px]">
-              <div className="px-4 flex justify-center items-center w-fit min-w-[8rem] h-full rounded-full bg-background-dark text-3xl">
+            <div className="bg-primary-light h-10 md:h-20 my-4 md:my-0 flex justify-between rounded-full w-[600px]">
+              <div className="px-4 flex justify-center items-center w-fit min-w-[8rem] h-full rounded-full bg-background-dark text-xl md:text-3xl">
                 Publikováno
               </div>
-              <div className="flex justify-center items-center px-5 text-3xl">
-                {json.published}
+              <div className="flex justify-center items-center px-5  text-xl md:text-3xl">
+                {json.published.substring(0, 10)}
               </div>
             </div>
-            <div className="bg-primary-light h-20 flex justify-between rounded-full w-[600px]">
-              <div className="px-4 flex justify-center items-center w-fit min-w-[8rem] h-full rounded-full bg-background-dark text-3xl">
+            <div className="bg-primary-light h-10 md:h-20 my-4 md:my-0 flex justify-between rounded-full w-[600px]">
+              <div className="px-4 flex justify-center items-center w-fit min-w-[8rem] h-full rounded-full bg-background-dark text-xl md:text-3xl">
                 Obtížnost
               </div>
-              <div className="flex justify-center items-center px-5 text-3xl">
+              <div className="flex justify-center items-center px-5  text-xl md:text-3xl">
                 {json.difficulty}
               </div>
             </div>
-            <div className="bg-primary-light h-20 flex justify-between rounded-full w-[600px]">
-              <div className="px-4 flex justify-center items-center w-fit min-w-[8rem] h-full rounded-full bg-background-dark text-3xl">
+            <div className="bg-primary-light h-10 md:h-20 my-4 md:my-0 flex justify-between rounded-full w-[600px]">
+              <div className="px-4 flex justify-center items-center w-fit min-w-[8rem] h-full rounded-full bg-background-dark text-xl md:text-3xl">
                 Likes
               </div>
-              <div className="flex justify-center items-center px-5 text-3xl">
+              <div className="flex justify-center items-center px-5  text-xl md:text-3xl">
                 {json.likes.length}
               </div>
             </div>
           </div>
-          <div className="bg-primary-light h-20 flex justify-between rounded-full w-full">
-            <div className="px-4 flex justify-center items-center w-fit min-w-[8rem] h-full rounded-full bg-background-dark text-3xl">
+          <div className="bg-primary-light min-h-[10] md:h-20 flex justify-between rounded-full w-full">
+            <div className="px-4 flex justify-center items-center w-fit min-w-[8rem] h-full rounded-full bg-background-dark text-xl md:text-3xl">
               Kategorie
             </div>
             <div className="flex justify-center items-center px-5 text-3xl">
@@ -103,7 +103,7 @@ export default async function page({
               })}
             </div>
           </div>
-          <div className="w-2/3 h-fit m-10 p-8 flex items-center flex-col  bg-primary-dark rounded-3xl">
+          <div className="md:w-2/3 w-full h-fit m-10 p-8 flex items-center flex-col  bg-primary-dark rounded-3xl">
             <div className="px-4 flex justify-center items-center w-fit min-w-[8rem] h-24 mb-10 rounded-full bg-background-dark text-3xl">
               Ingredience
             </div>
@@ -133,7 +133,7 @@ export default async function page({
             </div>
           </div>
         </div>
-        <div className="w-[1300px] my-8 flex flex-col items-center justify-evenly  text-text-dark bg-background-dark rounded-3xl p-7 bg-opacity-40 border-2  border-secondary-dark">
+        <div className="w-full md:w-[1300px] my-8 flex flex-col items-center justify-evenly  text-text-dark bg-background-dark rounded-3xl p-7 bg-opacity-40 border-2  border-secondary-dark">
           {session && (
             <AddComment
               recipe={json.id}
@@ -165,7 +165,7 @@ export default async function page({
                     </Link>
                   </div>
                   {session?.user?.email == item.User.email ? (
-                    <div className="p-4 bg-background-dark rounded-3xl text-3xl hover:cursor-pointer">
+                    <div className="md:p-4 p-2 bg-background-dark rounded-3xl text-xl md:text-3xl hover:cursor-pointer">
                       <RemoveComment commentId={item.id}></RemoveComment>
                     </div>
                   ) : (

@@ -14,7 +14,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="dark:text-text-dark text-text-light overflow-x-hidden bg-primary-dark">
+      <body className="text-text-dark  overflow-x-hidden bg-primary-dark">
         <div className="bg-background-dark ">
           <div className="w-[300px] h-[300px] rounded-full bg-primary-dark absolute top-[450px] right-[450px]"></div>
           <div className="w-56 h-56 rounded-full bg-primary-dark absolute top-[500px] right-[250px]"></div>

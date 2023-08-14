@@ -21,7 +21,7 @@ export default function RecepiCard({ data }: { data: FullRecepi }) {
           setShowData(false);
         }, 200);
       }}
-      className="w-[400px] rounded-3xl  h-[600px] border-4 overflow-hidden"
+      className="md:w-[400px] w-[375px] rounded-3xl  h-[600px] border-4 overflow-hidden"
     >
       <div
         style={{ backgroundImage: `url(${data.image_url})` }}
@@ -46,10 +46,10 @@ export default function RecepiCard({ data }: { data: FullRecepi }) {
               {data.name}
             </div>
             <div className="flex flex-col justify-between  w-full h-[28%] p-2 text-white text-5xl">
-              <div className="flex justify-center text-[2rem] items-center bg-background-light dark:bg-background-dark w-fit px-5 rounded-full h-16">
+              <div className="flex justify-center text-[2rem] items-center  bg-background-dark w-fit px-5 rounded-full h-16">
                 {data.time_difficulty}
               </div>
-              <div className="flex justify-center text-[2rem] items-center  w-fit px-5 rounded-full h-16 bg-background-light dark:bg-background-dark ">
+              <div className="flex justify-center text-[2rem] items-center  w-fit px-5 rounded-full h-16  bg-background-dark ">
                 {data.difficulty}
               </div>
             </div>

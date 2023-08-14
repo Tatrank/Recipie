@@ -28,7 +28,7 @@ export function SearchBar() {
           width: showSearch ? 0 : "25rem",
           paddingLeft: showSearch ? 0 : "0.75rem",
         }}
-        className="pl-3 rounded-full  h-9 dark:bg-primary-dark dark:text-text-dark"
+        className="pl-3 rounded-full  h-9 bg-primary-dark text-text-dark"
         value={text}
         onChange={(e) => {
           setText(e.target.value);
@@ -42,7 +42,7 @@ export function SearchBar() {
           width: showSearch ? "12rem" : "4rem",
         }}
         transition={{}}
-        className="h-10 flex w-[4rem] bg-secondary-light items-center justify-center dark:bg-secondary-dark rounded-full"
+        className="h-10 cursor-pointer flex w-[4rem]  items-center justify-center bg-secondary-dark rounded-full"
       >
         <Magnyfing_glass></Magnyfing_glass>
       </motion.div>

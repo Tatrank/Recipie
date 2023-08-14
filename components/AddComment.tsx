@@ -65,10 +65,10 @@ export default function AddComment({
         </div>
         <motion.div
           initial={{ scale: 0 }}
-          animate={{ scale:  1 }}
+          animate={{ scale: 1 }}
           whileHover={{ scale: 1.2 }}
           whileTap={{ scale: 0.8 }}
-          className="p-4 bg-background-dark rounded-3xl text-3xl hover:cursor-pointer"
+          className="md:p-4 p-2 bg-background-dark rounded-3xl text-xl md:text-3xl hover:cursor-pointer"
           onClick={handleSubmit}
         >
           Send

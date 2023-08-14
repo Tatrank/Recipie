@@ -16,16 +16,15 @@ export default function Navbar() {
     <>
       <div className="z-50 sticky top-0 ml-auto">
         <motion.div
-          initial={{ left: "-20rem" }}
-          animate={{ left: !showCategory ? "-20rem" : "0" }}
-          className="absolute  w-72 overflow-y-auto overflow-x-hidden h-screen  bg-black
+          initial={{ left: "-50rem" }}
+          animate={{ left: !showCategory ? "-50rem" : "0" }}
+          className="absolute  w-full md:w-72 overflow-y-auto overflow-x-hidden h-screen  bg-black
 backdrop-filter backdrop-blur-lg bg-opacity-10"
         >
-
           <CategoryBar></CategoryBar>
         </motion.div>
       </div>
-      <div className="z-50 flex justify-between justify-items-center items-center px-5 top-0 h-20 text-text-light  dark:text-text-dark w-[100%] border-b dark:border-secondary-dark  border-secondary-light bg-background-dark sticky backdrop-filter backdrop-blur-lg bg-opacity-60 ">
+      <div className="z-50 flex justify-between justify-items-center flex-col md:flex-row items-center px-5 top-0 h-48 md:h-20   text-text-dark w-[100%] border-b border-secondary-dark   bg-background-dark sticky backdrop-filter backdrop-blur-lg bg-opacity-60 ">
         <div className="flex justify-between justify-items-center items-center h-14 w-[10rem]">
           <div
             className="flex cursor-pointer items-center flex-col justify-evenly h-10"
@@ -60,7 +59,7 @@ backdrop-filter backdrop-blur-lg bg-opacity-10"
             ></motion.div>
           </div>
           <div className="text-4xl">
-            <Link href="/all">ReciPie</Link>
+            <Link href="/">ReciPie</Link>
           </div>
         </div>
         <SearchBar></SearchBar>
@@ -82,7 +81,7 @@ backdrop-filter backdrop-blur-lg bg-opacity-10"
                   <motion.div
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.9 }}
-                    className="hover:cursor-pointer flex justify-between justify-items-center items-center h-14 w-[14rem] overflow-hidden"
+                    className="hover:cursor-pointer flex justify-between justify-items-center  items-center h-14 w-[14rem] overflow-hidden"
                   >
                     <div></div>
                     <div className="w-[13rem] absolute h-9 flex p-3 rounded-2xl z-0 text-lg items-center bg-primary-dark">
@@ -98,34 +97,36 @@ backdrop-filter backdrop-blur-lg bg-opacity-10"
                 }
                 children={
                   <div className=" z-50 ">
-                    <div className="ml-auto  z-50 w-[15rem] h-56  text-text-light  dark:text-text-dark border-t-0 border dark:border-secondary-dark  border-secondary-light bg-background-dark backdrop-filter backdrop-blur-sm bg-opacity-60">
+                    <div className="ml-auto  z-50 w-[15rem] h-56    text-text-dark border-t-0 border border-secondary-dark   bg-background-dark backdrop-filter backdrop-blur-sm bg-opacity-60">
                       <div
                         onClick={() => {
                           signOut();
                         }}
-                        className="hover:cursor-pointer flex justify-center items-center text-xl w-full h-1/4 border-b dark:border-secondary-dark  border-secondary-light"
+                        className="hover:cursor-pointer flex justify-center items-center text-xl w-full h-1/4 border-b border-secondary-dark  "
                       >
                         Odhlásit
                       </div>
                       <Link href="/recipe/user/my_recipe">
-                        <div className="hover:cursor-pointer flex justify-center items-center text-xl w-full h-1/4 border-b dark:border-secondary-dark  border-secondary-light">
+                        <div className="hover:cursor-pointer flex justify-center items-center text-xl w-full h-1/4 border-b border-secondary-dark ">
                           Moje
                         </div>
                       </Link>
                       <Link href="/post_recipe">
-                        <div className="hover:cursor-pointer flex justify-center items-center text-xl w-full h-1/4 border-b dark:border-secondary-dark  border-secondary-light">
+                        <div className="hover:cursor-pointer flex justify-center items-center text-xl w-full h-1/4 border-b border-secondary-dark  ">
                           Vytvořit
                         </div>
                       </Link>
                       <Link href="/recipe/user/my_favourites">
-                        <div className="hover:cursor-pointer flex justify-center items-center text-xl w-full h-1/4 dark:border-secondary-dark  border-secondary-light">
+                        <div className="hover:cursor-pointer flex justify-center items-center text-xl w-full h-1/4 border-secondary-dark  ">
                           Oblíbené
                         </div>
                       </Link>
                     </div>
                   </div>
                 }
-                classNames={"py-2 left-1 bottom-[-15.3rem] "}
+                classNames={
+                  "py-2 left-1 md:bottom-[-15.3rem]  bottom-[-14.6rem]"
+                }
               />
             </>
           )}
