@@ -6,6 +6,8 @@ import AddComment from "@/components/AddComment";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import LikeButton from "@/components/LikeButton";
+import CryptoJS from "@/lib/encryption";
+
 /* export async function generateStaticParams() {
   const category: { id: string }[] = await fetch(
     "http://localhost:3000/api/getStaticParams/getRecipeIDs"
@@ -30,9 +32,13 @@ export default async function page({
   const session = await getServerSession(authOptions);
   const json: FullRecepi = await data.json();
   console.log(json);
+  const mail = CryptoJS.AES.encrypt(
+    json.user.email,
+    "secret key 123"
+  ).toString();
   return (
     <div
-      className="m-[-2.5rem] sticky top-0 left-0 mt-[-7.5rem] w-[100vw] min-h-[1440px] "
+      className="m-[-2.5rem] mb-[-9rem] sticky top-0 left-0 mt-[-7.5rem] w-[100vw] min-h-[1440px] "
       style={{
         backgroundImage: `url(${json.image_url})`,
         backgroundSize: "cover",
@@ -56,7 +62,10 @@ export default async function page({
                 Přidal
               </div>
               <div className="flex justify-center items-center px-5 text-3xl">
-                {json.user.name}
+                <Link href={`/recipe/user/public/${mail}`}>
+                  {" "}
+                  {json.user.name}
+                </Link>
               </div>
             </div>
             <div className="bg-primary-light h-20 flex justify-between rounded-full w-[600px]">
@@ -134,6 +143,10 @@ export default async function page({
             ></AddComment>
           )}
           {json.comments.map((item) => {
+            let mailComment = CryptoJS.AES.encrypt(
+              item.User.email,
+              "secret key 123"
+            ).toString();
             return (
               <div className="flex my-4 flex-wrap bg-primary-dark w-full p-5 h-fit rounded-3xl">
                 <div className="flex mb-3 w-full justify-between items-center">
@@ -145,9 +158,11 @@ export default async function page({
                         src={item.User.image!}
                       ></img>
                     </div>
-                    <div className="w-[13rem]  h-9 flex justify-end p-3 rounded-2xl z-0 text-lg items-center bg-background-dark">
-                      {item.User.name}
-                    </div>
+                    <Link href={`/recipe/user/public/${mailComment}`}>
+                      <div className="w-[13rem]  h-9 flex justify-end p-3 rounded-2xl z-0 text-lg items-center bg-background-dark">
+                        {item.User.name}
+                      </div>
+                    </Link>
                   </div>
                   {session?.user?.email == item.User.email ? (
                     <div className="p-4 bg-background-dark rounded-3xl text-3xl hover:cursor-pointer">
@@ -169,29 +184,5 @@ export default async function page({
         </div>
       </div>
     </div>
-    /*     <h1>
-      {json.name}
-      <Link href={`/recipe/${json.categories[0].name}`}>
-        {json.categories[0].name}
-      </Link>{" "}
-      {session && (
-        <AddComment recipe={json.id} user={session?.user?.email!}></AddComment>
-      )}
-      <div>
-        {json.comments.map((item) => {
-          return (
-            <>
-              {session?.user?.email == item.User.email && (
-                <div>
-                  <RemoveComment commentId={item.id}></RemoveComment>
-                </div>
-              )}
-
-              {item.text}
-            </>
-          );
-        })}
-      </div>
-    </h1> */
   );
 }

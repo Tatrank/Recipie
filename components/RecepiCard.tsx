@@ -1,6 +1,5 @@
 "use client";
 
-
 import { FullRecepi } from "@/types";
 import { useState } from "react";
 import { motion } from "framer-motion";
@@ -8,8 +7,9 @@ export default function RecepiCard({ data }: { data: FullRecepi }) {
   const [showData, setShowData] = useState(false);
   return (
     <motion.div
+      initial={{ scale: 0 }}
+      animate={{ scale: 1 }}
       transition={{ delay: 0.2 }}
-      initial={{ rotateY: 0 }}
       whileHover={{ rotateY: 180 }}
       onMouseOver={() => {
         setTimeout(() => {

@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import TextareaAutosize from "react-textarea-autosize";
+import { motion } from "framer-motion";
 export default function AddComment({
   recipe,
   user,
@@ -53,16 +54,25 @@ export default function AddComment({
           <div className="border absolute z-10 rounded-full border-secondary-dark">
             <img className="w-12 h-12 rounded-full " src={userImage}></img>
           </div>
-          <div className="w-[13rem]  h-9 flex justify-end p-3 rounded-2xl z-0 text-lg items-center bg-background-dark">
+          <div
+            onClick={() => {
+              router.push("/recipe/user/my_recipe");
+            }}
+            className="w-[13rem] hover:cursor-pointer  h-9 flex justify-end p-3 rounded-2xl z-0 text-lg items-center bg-background-dark"
+          >
             {userName}
           </div>
         </div>
-        <div
+        <motion.div
+          initial={{ scale: 0 }}
+          animate={{ scale:  1 }}
+          whileHover={{ scale: 1.2 }}
+          whileTap={{ scale: 0.8 }}
           className="p-4 bg-background-dark rounded-3xl text-3xl hover:cursor-pointer"
           onClick={handleSubmit}
         >
           Send
-        </div>
+        </motion.div>
       </div>
       <TextareaAutosize
         onChange={(e) => {

@@ -1,5 +1,5 @@
 "use client";
-import { Flex } from "@chakra-ui/react";
+import { motion } from "framer-motion";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 export default function CategoryBar() {
@@ -24,16 +24,24 @@ export default function CategoryBar() {
       </div>
       <div>
         <Link href={`/all`}>
-          <div className="w-full  h-16 flex justify-center items-center border-5 border border-primary-dark dark:bg-background-dark bg-background-light text-md">
+          <motion.div
+            whileTap={{ scale: 0.8 }}
+            whileHover={{ scale: 1.4 }}
+            className="w-full  h-16 flex justify-center items-center border-5 border border-primary-dark dark:bg-background-dark bg-background-light text-md"
+          >
             Vše
-          </div>
+          </motion.div>
         </Link>
         {category.map((item) => {
           return (
             <Link href={`/recipe/${item.name}`}>
-              <div className="w-full  h-16 flex justify-center items-center border-5 border border-primary-dark dark:bg-background-dark bg-background-light text-md">
+              <motion.div
+                whileTap={{ scale: 0.8 }}
+                whileHover={{ scale: 1.4 }}
+                className="w-full  h-16 flex justify-center items-center border-5 border border-primary-dark dark:bg-background-dark bg-background-light text-md"
+              >
                 {item.name}
-              </div>
+              </motion.div>
             </Link>
           );
         })}

@@ -2,6 +2,9 @@
 import { useState, useEffect } from "react";
 import { Favourite_add, Favourite_remove } from "./Icons";
 import { useRouter } from "next/navigation";
+import { motion } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
+
 export default function LikeButton({
   UserID,
   RecipeID,
@@ -38,9 +41,27 @@ export default function LikeButton({
       }}
     >
       {addedLikes ? (
-        <Favourite_remove></Favourite_remove>
+        <AnimatePresence>
+          <motion.div
+            key="something1"
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            exit={{ scale: 0 }}
+          >
+            <Favourite_remove></Favourite_remove>
+          </motion.div>
+        </AnimatePresence>
       ) : (
-        <Favourite_add></Favourite_add>
+        <AnimatePresence>
+          <motion.div
+            key="something2"
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            exit={{ scale: 0 }}
+          >
+            <Favourite_add></Favourite_add>
+          </motion.div>
+        </AnimatePresence>
       )}
     </div>
   );

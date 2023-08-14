@@ -7,7 +7,7 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { UploadButton } from "@/lib/uploadthing";
 import "@uploadthing/react/styles.css";
-
+import { motion } from "framer-motion";
 interface FormData {
   name: string;
   difficulty: string;
@@ -123,8 +123,8 @@ export default function Form(): JSX.Element {
   }
 
   return (
-    <div className="p-4 w-[1000px]">
-      <div>
+    <div className="p-4 flex justify-center w-[1000px]">
+      <div className="w-full  ">
         <div className="mb-4">
           <label className="block font-bold">Jméno</label>
           <input
@@ -133,7 +133,8 @@ export default function Form(): JSX.Element {
             value={formData.name}
             onChange={handleInputChange}
             placeholder="Zadejejte svoje jméno"
-            className="w-full p-2 border border-gray-300 rounded"
+            className="w-full
+ bg-background-dark rounded border-secondary-dark bg-opacity-0 p-2"
             required
           />
         </div>
@@ -155,9 +156,10 @@ export default function Form(): JSX.Element {
             }}
           />
         ) : (
-          <>
+          <div className="w-full flex flex-col justify-between items-center">
             <img src={formData.image_url} alt="Recipe" />
-            <button
+            <motion.button
+              whileHover={{ scale: 1.3 }}
               onClick={async () => {
                 await fetch(
                   `http://localhost:3000/api/deleteImage?imageId=${formData.image_key}`,
@@ -165,11 +167,12 @@ export default function Form(): JSX.Element {
                 );
                 setUseableUpload(true);
               }}
-              className="mt-2 px-4 py-2 text-white bg-blue-500 rounded"
+              className="w-24
+bg-primary-dark rounded p-2 mt-2 cursor-pointer"
             >
               Změnit obrázek
-            </button>
-          </>
+            </motion.button>
+          </div>
         )}
 
         <div className="mt-4">
@@ -182,7 +185,7 @@ export default function Form(): JSX.Element {
               setFormData((prevData) => ({ ...prevData, [name]: value }));
             }}
             placeholder="Enter difficulty of meal"
-            className="w-full p-2 border border-gray-300 rounded"
+            className="w-full min-h-[10rem] bg-background-dark rounded border-secondary-dark bg-opacity-0 p-2"
             required
           />
         </div>
@@ -194,7 +197,8 @@ export default function Form(): JSX.Element {
             value={formData.difficulty}
             onChange={handleInputChange}
             placeholder="Enter difficulty of meal"
-            className="w-full p-2 border border-gray-300 rounded"
+            className="w-full
+ bg-background-dark rounded border-secondary-dark bg-opacity-0 p-2"
             required
           />
         </div>
@@ -206,14 +210,15 @@ export default function Form(): JSX.Element {
             value={formData.time_difficulty}
             onChange={handleInputChange}
             placeholder="Enter time difficulty of meal"
-            className="w-full p-2 border border-gray-300 rounded"
+            className="w-full
+ bg-background-dark rounded border-secondary-dark bg-opacity-0 p-2"
             required
           />
         </div>
         <div className="mt-4">
           <label className="block font-bold">Step by step</label>
           <TextareaAutosize
-            className="w-full min-h-[15rem] bg-background-dark rounded border-white bg-opacity-0 p-2"
+            className="w-full min-h-[15rem] bg-background-dark rounded border-secondary-dark bg-opacity-0 p-2"
             name="stepByStep"
             value={formData.stepByStep}
             onChange={(e) => {
@@ -236,7 +241,8 @@ export default function Form(): JSX.Element {
               onClick={() => {
                 addCategory(index);
               }}
-              className="w-full p-2 border border-gray-300 rounded"
+              className="w-full
+ bg-background-dark rounded border-secondary-dark bg-opacity-0 p-2"
               required
             />
           </div>
@@ -253,7 +259,8 @@ export default function Form(): JSX.Element {
               onClick={() => {
                 addGroceriesAndMesuerements(index);
               }}
-              className="w-full p-2 border border-gray-300 rounded"
+              className="w-full
+ bg-background-dark rounded border-secondary-dark bg-opacity-0 p-2"
               required
             />
             <label className="block font-bold">Value {index + 1}</label>
@@ -263,17 +270,21 @@ export default function Form(): JSX.Element {
               value={formData.groceries_measueres[index][1]}
               onChange={handleInputChange}
               placeholder="Value"
-              className="w-full p-2 mt-2 border border-gray-300 rounded"
+              className="w-full
+ bg-background-dark rounded border-secondary-dark bg-opacity-0 p-2"
               required
             />
           </div>
         ))}
-        <button
-          onClick={handleSubmit}
-          className="mt-4 px-4 py-2 text-white bg-teal-500 rounded"
-        >
-          Submit
-        </button>
+        <div className="flex justify-center w-full">
+          <motion.button
+            whileHover={{ scale: 1.2 }}
+            onClick={handleSubmit}
+            className="mt-4 m-auto py-8  text-4xl px-16  bg-primary-dark rounded"
+          >
+            Submit
+          </motion.button>
+        </div>
       </div>
     </div>
   );
