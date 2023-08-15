@@ -24,7 +24,7 @@ export default async function Page({
       {json.length ? (
         <div className="flex flex-wrap justify-center h-fit w-9/10">
           {json.map((item: FullRecepi) => (
-            <div className="w-fit m-20 h-fit">
+            <div key={item.id} className="w-fit m-20 h-fit">
               {/*           <LikeButton
             NumberLikes={item.likes.length}
             RecipeID={item.id}

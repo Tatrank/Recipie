@@ -34,7 +34,7 @@ export default function CategoryBar() {
         </Link>
         {category.map((item) => {
           return (
-            <Link href={`/recipe/${item.name}`}>
+            <Link key={item.name} href={`/recipe/${item.name}`}>
               <motion.div
                 whileTap={{ scale: 0.8 }}
                 whileHover={{ scale: 1.4 }}

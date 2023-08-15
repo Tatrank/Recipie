@@ -30,7 +30,8 @@ export default function LikeButton({
 
   return (
     <div
-      className="cursor-pointer absolute top-[22rem] right-[500px]
+      className="cursor-pointer 
+      mx-5
      w-[100px] h-[100px] z-50 "
       onClick={async () => {
         await fetch(

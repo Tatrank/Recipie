@@ -8,16 +8,6 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import LikeButton from "@/components/LikeButton";
 import CryptoJS from "@/lib/encryption";
 
-/* export async function generateStaticParams() {
-  const category: { id: string }[] = await fetch(
-    "http://localhost:3000/api/getStaticParams/getRecipeIDs"
-  ).then((res) => res.json());
-
-  return category.map((item) => ({
-    id: item.id,
-  }));
-}
- */
 export default async function page({
   params,
 }: {
@@ -31,7 +21,6 @@ export default async function page({
   );
   const session = await getServerSession(authOptions);
   const json: FullRecepi = await data.json();
-  console.log(json);
   const mail = CryptoJS.AES.encrypt(
     json.user.email,
     "secret key 123"
@@ -44,17 +33,17 @@ export default async function page({
         backgroundSize: "cover",
       }}
     >
-      {session && (
-        <LikeButton
-          NumberLikes={2}
-          RecipeID={json.id}
-          UserID={session?.user?.email!}
-        ></LikeButton>
-      )}
       <div className=" h-full flex justify-center items-center flex-col w-full px-3 py-[20rem]  bg-black backdrop-filter backdrop-blur-xl bg-opacity-60  ">
         <div className="md:w-[1300px] w-full flex flex-col items-center   text-text-dark bg-background-dark rounded-3xl p-7 bg-opacity-40 border-2  border-secondary-dark">
           <div className="flex justify-center items-center text-6xl md:text-8xl">
             {json.name}
+            {session && (
+              <LikeButton
+                NumberLikes={2}
+                RecipeID={json.id}
+                UserID={session?.user?.email!}
+              ></LikeButton>
+            )}
           </div>
           <div className="flex flex-wrap  justify-between justify-items-center items-center w-full h-fit md:h-52 my-10 ">
             <div className="bg-primary-dark h-10 md:h-20 my-4 md:my-0 flex justify-between rounded-full w-[600px]">
@@ -111,14 +100,14 @@ export default async function page({
               <div className="w-2/5 flex justify-end items-center h-full text-xl pr-3  border-r-2">
                 <div>
                   {json.groceries_measueres.map((item) => {
-                    return <div> {item.grocery.name}</div>;
+                    return <div key={item.id}> {item.grocery.name}</div>;
                   })}
                 </div>
               </div>
               <div className="w-2/5 h-full text-xl flex items-center  pl-3">
                 <div>
                   {json.groceries_measueres.map((item) => {
-                    return <div> {item.measure.value}</div>;
+                    return <div key={item.id}> {item.measure.value}</div>;
                   })}
                 </div>
               </div>
@@ -148,7 +137,10 @@ export default async function page({
               "secret key 123"
             ).toString();
             return (
-              <div className="flex my-4 flex-wrap bg-primary-dark w-full p-5 h-fit rounded-3xl">
+              <div
+                key={item.id}
+                className="flex my-4 flex-wrap bg-primary-dark w-full p-5 h-fit rounded-3xl"
+              >
                 <div className="flex mb-3 w-full justify-between items-center">
                   <div className=" flex justify-between justify-items-center items-center h-14 w-[14rem] overflow-hidden">
                     <div></div>

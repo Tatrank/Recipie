@@ -20,7 +20,7 @@ export default async function Page({ params }: { params: { user: string[] } }) {
         Recepty uživatele: {json[0].user.name}{" "}
       </div>
       {json.map((item: FullRecepi) => (
-        <div className="w-fit  m-20 h-fit">
+        <div key={item.id} className="w-fit  m-20 h-fit">
           <div className="flex flex-col items-center justify-between ">
             <Link
               href={`http://localhost:3000/recipe/${item.categories[0].name}/${item.name}/${item.id}`}

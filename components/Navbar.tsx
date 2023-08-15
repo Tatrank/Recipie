@@ -8,6 +8,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { position } from "@chakra-ui/react";
+import {}
 export default function Navbar() {
   const { data: session, status } = useSession();
   const [showCategory, setShowCategory] = useState<boolean>(false);
