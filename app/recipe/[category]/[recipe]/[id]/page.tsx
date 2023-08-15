@@ -57,7 +57,7 @@ export default async function page({
             {json.name}
           </div>
           <div className="flex flex-wrap  justify-between justify-items-center items-center w-full h-fit md:h-52 my-10 ">
-            <div className="bg-primary-light h-10 md:h-20 my-4 md:my-0 flex justify-between rounded-full w-[600px]">
+            <div className="bg-primary-dark h-10 md:h-20 my-4 md:my-0 flex justify-between rounded-full w-[600px]">
               <div className="px-4 flex justify-center items-center w-fit min-w-[8rem] h-full rounded-full bg-background-dark text-xl md:text-3xl">
                 Přidal
               </div>
@@ -68,7 +68,7 @@ export default async function page({
                 </Link>
               </div>
             </div>
-            <div className="bg-primary-light h-10 md:h-20 my-4 md:my-0 flex justify-between rounded-full w-[600px]">
+            <div className="bg-primary-dark h-10 md:h-20 my-4 md:my-0 flex justify-between rounded-full w-[600px]">
               <div className="px-4 flex justify-center items-center w-fit min-w-[8rem] h-full rounded-full bg-background-dark text-xl md:text-3xl">
                 Publikováno
               </div>
@@ -76,7 +76,7 @@ export default async function page({
                 {json.published.substring(0, 10)}
               </div>
             </div>
-            <div className="bg-primary-light h-10 md:h-20 my-4 md:my-0 flex justify-between rounded-full w-[600px]">
+            <div className="bg-primary-dark h-10 md:h-20 my-4 md:my-0 flex justify-between rounded-full w-[600px]">
               <div className="px-4 flex justify-center items-center w-fit min-w-[8rem] h-full rounded-full bg-background-dark text-xl md:text-3xl">
                 Obtížnost
               </div>
@@ -84,7 +84,7 @@ export default async function page({
                 {json.difficulty}
               </div>
             </div>
-            <div className="bg-primary-light h-10 md:h-20 my-4 md:my-0 flex justify-between rounded-full w-[600px]">
+            <div className="bg-primary-dark h-10 md:h-20 my-4 md:my-0 flex justify-between rounded-full w-[600px]">
               <div className="px-4 flex justify-center items-center w-fit min-w-[8rem] h-full rounded-full bg-background-dark text-xl md:text-3xl">
                 Likes
               </div>
@@ -93,7 +93,7 @@ export default async function page({
               </div>
             </div>
           </div>
-          <div className="bg-primary-light min-h-[10] md:h-20 flex justify-between rounded-full w-full">
+          <div className="bg-primary-dark min-h-[10] md:h-20 flex justify-between rounded-full w-full">
             <div className="px-4 flex justify-center items-center w-fit min-w-[8rem] h-full rounded-full bg-background-dark text-xl md:text-3xl">
               Kategorie
             </div>
