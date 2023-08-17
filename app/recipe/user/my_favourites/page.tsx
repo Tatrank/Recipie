@@ -5,6 +5,7 @@ import Link from "next/link";
 import RecepiCard from "@/components/RecepiCard";
 import { FullRecepi } from "@/types";
 import { Metadata } from "next";
+
 export const metadata: Metadata = {
   title: "Moje oblíbené",
 };
@@ -36,7 +37,14 @@ export default async function Page({}: {}) {
           ))}
         </div>
       ) : (
-        <div className="text-3xl">Tady nic není</div>
+        <div className="text-3xl flex justify-center items-center">
+          Tady zatím nic není.
+          <Link href={"/all"}>
+            <div className="rounded-md mx-4 flex items-center w-fit px-4 h-12 bg-primary-dark">
+              Likněte něco
+            </div>
+          </Link>
+        </div>
       )}
     </>
   );

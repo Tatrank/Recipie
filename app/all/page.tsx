@@ -24,7 +24,16 @@ export default async function Page({
   );
   const json: FullRecepi[] = await data.json();
   return (
-    <>
+    <div
+      className="flex flex-col items-center justify-center
+    "
+    >
+      {searchParams.searchParams && (
+        <div className="flex justify-center w-[100vw] items-center h-20 text-4xl">
+          Výsledky vyhledávání: {searchParams.searchParams}
+        </div>
+      )}
+
       {json.length ? (
         <div className="flex flex-wrap justify-center h-fit w-9/10">
           {json.map((item: FullRecepi) => (
@@ -43,8 +52,8 @@ export default async function Page({
           ))}
         </div>
       ) : (
-        <div className="text-3xl">Tady nic není</div>
+        <div className="text-3xl my-7">Tady nic není</div>
       )}
-    </>
+    </div>
   );
 }

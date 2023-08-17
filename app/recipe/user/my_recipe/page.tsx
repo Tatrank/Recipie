@@ -21,21 +21,31 @@ export default async function Page() {
   const json: FullRecepi[] = await data.json();
   return (
     <>
-    {json.length ?     <div className="flex flex-wrap justify-center h-fit w-9/10">
-      {json.map((item: FullRecepi) => (
-        <div key={item.id} className="w-fit  m-20 h-fit">
-          <div className="flex flex-col items-center justify-between ">
-            <DeleteButton id={item.id}></DeleteButton>
-            <Link
-              href={`http://localhost:3000/recipe/${item.categories[0].name}/${item.name}/${item.id}`}
-            >
-              <RecepiCard data={item}></RecepiCard>
-            </Link>
-          </div>
+      {json.length ? (
+        <div className="flex flex-wrap justify-center h-fit w-9/10">
+          {json.map((item: FullRecepi) => (
+            <div key={item.id} className="w-fit  m-20 h-fit">
+              <div className="flex flex-col items-center justify-between ">
+                <DeleteButton id={item.id}></DeleteButton>
+                <Link
+                  href={`http://localhost:3000/recipe/${item.categories[0].name}/${item.name}/${item.id}`}
+                >
+                  <RecepiCard data={item}></RecepiCard>
+                </Link>
+              </div>
+            </div>
+          ))}
         </div>
-      ))}
-    </div>: <div className="text-3xl">Nic zde</div>}
-
+      ) : (
+        <div className="text-3xl flex justify-center items-center">
+          Tady zatím nic není.
+          <Link href={"/post_recipe"}>
+            <div className="rounded-md mx-4 flex items-center w-fit px-4 h-12 bg-primary-dark">
+              Vytvořte něco
+            </div>
+          </Link>
+        </div>
+      )}
     </>
   );
 }

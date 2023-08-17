@@ -1,20 +1,16 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
 import { useDebounce } from "use-debounce";
 import { Magnyfing_glass } from "./Icons";
+import { usePathname, useSearchParams } from "next/navigation";
 export function SearchBar() {
+  const pathname = usePathname();
   const router = useRouter();
   const [showSearch, setShowSearch] = useState(true);
-  const [text, setText] = useState<string | undefined>(undefined);
+  const [text, setText] = useState<string | null>(null);
   const [query] = useDebounce(text, 500);
-  if (query != undefined && query != "") {
-    router.push(`/all?searchParams=${query}`);
-  }
-  if (query == "") {
-    router.push(`/all`);
-  }
 
   return (
     <motion.div
@@ -29,7 +25,7 @@ export function SearchBar() {
           paddingLeft: showSearch ? 0 : "0.75rem",
         }}
         className="pl-3 rounded-full  h-9 bg-primary-dark text-text-dark"
-        value={text}
+        value={text!}
         onChange={(e) => {
           setText(e.target.value);
         }}
@@ -37,6 +33,12 @@ export function SearchBar() {
       <motion.div
         onClick={() => {
           setShowSearch(!showSearch);
+          if (query != null && query != "") {
+            router.push(`/all?searchParams=${query}`);
+          }
+          if (query == "") {
+            router.push(`/all`);
+          }
         }}
         animate={{
           width: showSearch ? "12rem" : "4rem",
