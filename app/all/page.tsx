@@ -1,8 +1,12 @@
 import Link from "next/link";
 import RecepiCard from "@/components/RecepiCard";
 import { FullRecepi } from "@/types";
-import LikeButton from "@/components/LikeButton";
-import CategoryBar from "@/components/CategoryBar";
+import { Metadata } from "next";
+export const metadata: Metadata = {
+  title: "Vše",
+  description: "Stránka, která zobrazuje vše",
+};
+
 export default async function Page({
   searchParams,
 }: {

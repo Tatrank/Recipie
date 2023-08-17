@@ -8,6 +8,22 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import LikeButton from "@/components/LikeButton";
 import CryptoJS from "@/lib/encryption";
 
+import type { Metadata, ResolvingMetadata } from "next";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { category: String; recipe: String; id: String };
+}) {
+  // read route params
+
+  // fetch data
+
+  return {
+    title: params.recipe,
+  };
+}
+
 export default async function page({
   params,
 }: {

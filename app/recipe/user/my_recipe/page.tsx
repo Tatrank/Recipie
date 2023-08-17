@@ -5,6 +5,10 @@ import Link from "next/link";
 import RecepiCard from "@/components/RecepiCard";
 import { FullRecepi } from "@/types";
 import DeleteButton from "@/components/DeletButton";
+import { Metadata } from "next";
+export const metadata: Metadata = {
+  title: "Moje recepty",
+};
 export default async function Page() {
   const session = await getServerSession(authOptions);
 

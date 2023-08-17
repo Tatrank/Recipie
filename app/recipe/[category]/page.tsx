@@ -2,6 +2,20 @@ import Link from "next/link";
 import RecepiCard from "@/components/RecepiCard";
 import { FullRecepi } from "@/types";
 
+export async function generateMetadata({
+  params,
+}: {
+  params: { category: String };
+}) {
+  // read route params
+
+  // fetch data
+
+  return {
+    title: params.category,
+  };
+}
+
 export async function generateStaticParams() {
   const category: { name: string; id: string }[] = await fetch(
     "http://localhost:3000/api/getStaticParams/getCategories"

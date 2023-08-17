@@ -48,7 +48,16 @@ export default function Form(): JSX.Element {
     e.preventDefault();
 
     // Check if any required input fields are empty
-    if (formData.name === "" || formData.difficulty === "") {
+    if (
+      formData.name === "" ||
+      formData.difficulty === "" ||
+      formData.description === "" ||
+      formData.time_difficulty === "" ||
+      formData.stepByStep === "" ||
+      formData.category[0] == "" ||
+      formData.groceries_measueres[0][0] === "" ||
+      formData.groceries_measueres[0][1] === ""
+    ) {
       alert("Please fill in required fields.");
       return;
     }
@@ -73,6 +82,7 @@ export default function Form(): JSX.Element {
         console.error("Error adding recipe");
       }
     } catch (error) {
+      alert("něco se nepovedlo");
       console.error("An error occurred:", error);
     }
   }

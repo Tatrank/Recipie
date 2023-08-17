@@ -5,6 +5,10 @@ import Link from "next/link";
 import RecepiCard from "@/components/RecepiCard";
 import { FullRecepi } from "@/types";
 import CryptoJS from "@/lib/encryption";
+import { Metadata } from "next";
+export const metadata: Metadata = {
+  title: "Uživatel",
+};
 export default async function Page({ params }: { params: { user: string[] } }) {
   const fullUrl = decodeURIComponent(params.user.toString()).replace(",", "/");
   const bytes = CryptoJS.AES.decrypt(fullUrl, "secret key 123");

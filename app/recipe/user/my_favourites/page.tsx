@@ -4,7 +4,10 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import Link from "next/link";
 import RecepiCard from "@/components/RecepiCard";
 import { FullRecepi } from "@/types";
-import DeleteButton from "@/components/DeletButton";
+import { Metadata } from "next";
+export const metadata: Metadata = {
+  title: "Moje oblíbené",
+};
 export default async function Page({}: {}) {
   const session = await getServerSession(authOptions);
 

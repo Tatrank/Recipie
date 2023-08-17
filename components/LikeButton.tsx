@@ -44,6 +44,7 @@ export default function LikeButton({
       {addedLikes ? (
         <AnimatePresence>
           <motion.div
+            className="absolute"
             key="something1"
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
@@ -55,6 +56,7 @@ export default function LikeButton({
       ) : (
         <AnimatePresence>
           <motion.div
+            className="absolute"
             key="something2"
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
