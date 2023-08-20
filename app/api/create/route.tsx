@@ -1,57 +1,21 @@
 import { db } from "@/lib/db";
 import { NextResponse } from "next/server";
-/* export async function GET() {
-  const eamil = "dousa.vaclav@post.cz";
-  let UserId = await db.user.findUnique({
-    where: { email: eamil },
-    select: { id: true },
-  });
-
-  let measuereid = await db.groceries_mesaure.findFirst({
-    where: {
-      AND: [{ grocery: { name: "mléko" } }, { measure: { value: "100 ml" } }],
-    },
-    select: { id: true },
-  });
-
-  let create = await db.groceries_mesaure.create({
-    data: {
-      grocery: {
-        connectOrCreate: {
-          where: { name: "mléko" },
-          create: {
-            name: "mléko",
-          },
-        },
-      },
-      measure: {
-        connectOrCreate: {
-          where: { value: "100 ml" },
-          create: {
-            value: "100 ml",
-          },
-        },
-      },
-    },
-    select: { id: true },
-  });
-
-  const data = await db.recipe.create({
-    data: {
-      name: "koprovka",
-      disclaimer: "lorem honem za chvíli tam budem",
-      user: { connect: { id: UserId?.id } },
-      categories: { connect: { id: "64552bf1-a0cd-4efa-b2e8-318388184b06" } },
-      groceries_measueres: {
-        connect: { id: "1a97442b-b589-4644-a32f-e2f33f233a07" },
-      },
-    },
-  });
-  return NextResponse.json(create);
-} */
 
 export async function POST(req: Request) {
   const data = await req.json();
+  if (
+    data.name.length >= 25 ||
+    data.difficulty.length >= 25 ||
+    data.description.length >= 200 ||
+    data.time_difficulty.length >= 20 ||
+    data.stepByStep.length >= 1000 ||
+    data.category.length >= 6 ||
+    data.groceries_measueres.length >= 6
+  ) {
+    return NextResponse.json("unluko, jsem si se neměl dosta");
+  }
+ 
+
   const userID = await db.user.findUnique({
     where: { email: data.email },
     select: { id: true },

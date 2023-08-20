@@ -9,7 +9,7 @@ export function SearchBar() {
   const pathname = usePathname();
   const router = useRouter();
   const [showSearch, setShowSearch] = useState(true);
-  const [text, setText] = useState<string | null>(null);
+  const [text, setText] = useState<string>("");
   const [query] = useDebounce(text, 500);
 
   return (
@@ -33,7 +33,7 @@ export function SearchBar() {
       <motion.div
         onClick={() => {
           setShowSearch(!showSearch);
-          if (query != null && query != "") {
+          if (query != "") {
             router.push(`/all?searchParams=${query}`);
           }
           if (query == "") {

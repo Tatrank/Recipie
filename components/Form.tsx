@@ -58,10 +58,39 @@ export default function Form(): JSX.Element {
       formData.groceries_measueres[0][0] === "" ||
       formData.groceries_measueres[0][1] === ""
     ) {
-      alert("Please fill in required fields.");
+      alert("Vyplňte všechna data");
+      return;
+    }
+    if (formData.name.length >= 25) {
+      alert("Zkraťte jméno receptu");
+      return;
+    }
+    if (formData.difficulty.length >= 25) {
+      alert("Zkraťte obtížnost receptu");
+      return;
+    }
+    if (formData.description.length >= 200) {
+      alert("Zkraťte obsah receptu");
+      return;
+    }
+    if (formData.time_difficulty.length >= 20) {
+      alert("Zkraťte délku času receptu");
       return;
     }
 
+    if (formData.stepByStep.length >= 1000) {
+      alert("Zkraťte délku receptu");
+      return;
+    }
+
+    if (formData.category.length >= 6) {
+      alert("Hodně kategorií");
+      return;
+    }
+    if (formData.groceries_measueres.length >= 6) {
+      alert("Hodně surovin");
+      return;
+    }
     try {
       const response = await fetch("http://localhost:3000/api/create", {
         method: "POST",
@@ -115,6 +144,10 @@ export default function Form(): JSX.Element {
   };
 
   function addCategory(index: number) {
+    if (formData.category.length > 6) {
+      console.log("hey");
+      return;
+    }
     if (index + 1 === formData.category.length) {
       setFormData((prevData) => ({
         ...prevData,
@@ -124,6 +157,9 @@ export default function Form(): JSX.Element {
   }
 
   function addGroceriesAndMesuerements(index: number) {
+    if (formData.groceries_measueres.length >= 20) {
+      return;
+    }
     if (index + 1 === formData.groceries_measueres.length) {
       setFormData((prevData) => ({
         ...prevData,
