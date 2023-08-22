@@ -5,7 +5,6 @@ import { useEffect, useRef, useState } from "react";
 // Usage example:
 export default function Page() {
   const targetRef = useRef<HTMLDivElement>(null);
-  const [isAtEnd, setIsAtEnd] = useState(false);
   const [data, setData] = useState<{ name: string }[]>([]);
   const [noMoreFetches, setNoMoreFetches] = useState(false);
   const [page, setPage] = useState(0);

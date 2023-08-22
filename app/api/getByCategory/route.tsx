@@ -4,6 +4,7 @@ export async function GET(request: Request) {
   console.log(request.json);
   const { searchParams } = new URL(request.url);
   const category: string | null = searchParams.get("categoryParams");
+  const query_params = parseInt(searchParams.get("page")!);
   if (category) {
     const data = await db.recipe.findMany({
       include: {
@@ -13,6 +14,8 @@ export async function GET(request: Request) {
         user: true,
       },
       where: { categories: { some: { name: category } } },
+      take: 12,
+      skip: 12 * query_params,
     });
     return NextResponse.json(data);
   } else return NextResponse.json([{}]);
