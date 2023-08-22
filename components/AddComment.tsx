@@ -22,6 +22,10 @@ export default function AddComment({
   });
 
   const handleSubmit = async () => {
+    if (data.commentText == "") {
+      alert("Nejdřív něco napište");
+      return;
+    }
     try {
       const response = await fetch("http://localhost:3000/api/comments", {
         method: "POST",
@@ -79,7 +83,7 @@ export default function AddComment({
           const { name, value } = e.target;
           setData((prevData) => ({ ...prevData, [name]: value }));
         }}
-        defaultValue={"Sdělte nám něco"}
+        placeholder="Vyjádřete se"
         name="commentText"
         className="w-full min-h-[6 rem] rounded-lg text-3xl h-fit p-7 bg-background-dark "
       ></TextareaAutosize>

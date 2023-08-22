@@ -1,11 +1,19 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { UserType } from "@/types";
+import Link from "next/link";
+import UserCard from "@/components/UserCard";
+import CryptoJS from "@/lib/encryption";
 
-// Usage example:
+import { Metadata } from "next";
+export const metadata: Metadata = {
+  title: "Profily",
+};
+
 export default function Page() {
   const targetRef = useRef<HTMLDivElement>(null);
-  const [data, setData] = useState<{ name: string }[]>([]);
+  const [data, setData] = useState<UserType[]>([]);
   const [noMoreFetches, setNoMoreFetches] = useState(false);
   const [page, setPage] = useState(0);
 
@@ -51,16 +59,29 @@ export default function Page() {
     };
   }, [targetRef, noMoreFetches]);
 
+  console.log(data);
+
   return (
-    <div>
-      <div className="w-[100vw] bg-accent-light h-[150vh]"></div>
-      {/* Your content */}
-      <div>
-        {data.map((item, index) => (
-          <div key={index}>{item.name}</div>
-        ))}
-      </div>
-      <div ref={targetRef}></div>
-    </div>
+    <>
+      {data.length ? (
+        <div className="flex flex-wrap justify-center h-fit w-9/10">
+          {data.map((item: UserType) => {
+            let mail = CryptoJS.AES.encrypt(
+              item.email,
+              "secret key 123"
+            ).toString();
+            return (
+              <div key={item.id} className="w-fit m-20 h-fit">
+                <Link href={`/recipe/user/public/${mail}`}>
+                  <UserCard data={item}></UserCard>
+                </Link>
+              </div>
+            );
+          })}
+        </div>
+      ) : (
+        <div className="text-3xl my-7">Tady nic není</div>
+      )}
+    </>
   );
 }

@@ -85,6 +85,11 @@ export default function Page({ params }: { params: { category: string } }) {
       className="flex flex-col items-center justify-center
     "
     >
+   
+        <div className="flex justify-center w-[100vw] items-center h-20 text-4xl">
+          Nyní prohlížíte: {params.category}
+        </div>
+   
       {json.length ? (
         <div className="flex flex-wrap justify-center h-fit w-9/10">
           {json.map((item: FullRecepi) => (

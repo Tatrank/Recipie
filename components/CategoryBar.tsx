@@ -19,6 +19,15 @@ export default function CategoryBar() {
   }, []);
   return (
     <div className="relative top-48 md:top-20">
+      <Link href={"/recipe/user/view_users"}>
+        <motion.div
+          whileTap={{ scale: 0.8 }}
+          whileHover={{ scale: 1.1 }}
+          className="flex justify-center items-center w-full h-32 border-1 border border-primary-dark bg-background-dark  text-4xl"
+        >
+          Prohlížet profily
+        </motion.div>
+      </Link>
       <div className="flex justify-center items-center w-full h-32 border-1 border border-primary-dark bg-background-dark  text-4xl">
         Kategorie
       </div>

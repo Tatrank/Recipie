@@ -24,7 +24,7 @@ backdrop-filter backdrop-blur-lg bg-opacity-10"
           <CategoryBar></CategoryBar>
         </motion.div>
       </div>
-      <div className="z-50 flex justify-between justify-items-center flex-col md:flex-row items-center px-5 top-0 h-48 md:h-20   text-text-dark w-[100%] border-b border-primary-dark   bg-background-dark sticky backdrop-filter backdrop-blur-lg bg-opacity-60 ">
+      <div className="z-50 flex justify-between justify-items-center flex-col md:flex-row items-center px-5 top-0 h-48 md:h-20   text-text-dark w-[100%] border-b border-secondary-dark   bg-background-dark sticky backdrop-filter backdrop-blur-lg bg-opacity-60 ">
         <div className="flex justify-between justify-items-center items-center h-14 w-[10rem]">
           <div
             className="flex cursor-pointer items-center flex-col justify-evenly h-10"
@@ -130,7 +130,6 @@ backdrop-filter backdrop-blur-lg bg-opacity-10"
               />
             </>
           )}
-          
         </div>
       </div>
     </>

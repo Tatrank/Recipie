@@ -24,7 +24,12 @@ export default function RecepiCard({ data }: { data: FullRecepi }) {
       className="md:w-[400px] w-[375px] rounded-3xl  h-[600px] border-4 overflow-hidden"
     >
       <div
-        style={{ backgroundImage: `url(${data.image_url})` }}
+        style={{
+          backgroundImage: `url(${data.image_url})`,
+          backgroundPosition: "center",
+          backgroundSize: "cover",
+          backgroundRepeat: "no-repeat",
+        }}
         className="h-full w-full"
       >
         {!showData ? (
