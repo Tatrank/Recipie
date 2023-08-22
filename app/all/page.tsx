@@ -38,11 +38,6 @@ export default async function Page({
         <div className="flex flex-wrap justify-center h-fit w-9/10">
           {json.map((item: FullRecepi) => (
             <div key={item.id} className="w-fit m-20 h-fit">
-              {/*           <LikeButton
-            NumberLikes={item.likes.length}
-            RecipeID={item.id}
-            UserID={item.userId}
-          ></LikeButton> */}
               <Link
                 href={`http://localhost:3000/recipe/${item.categories[0].name}/${item.name}/${item.id}`}
               >
