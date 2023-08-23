@@ -15,14 +15,15 @@ import { useState } from "react";
 export default function Share() {
   const [show, setShow] = useState(false);
   return (
-    <div className=" z-50  sticky top-0 right-5  ">
+    <div className=" z-50 sticky top-0 right-5  ">
       <motion.div
         animate={{
-          width: show ? "17rem" : "0rem",
+          borderColor: "rgb(255, 0, 0)",
+          width: show ? "18rem" : "0rem",
           padding: show ? "0.5rem" : 0,
         }}
         className="z-50 overflow-hidden
-         absolute flex items-center justify-items-center align-middle   justify-between   w-fit  top-[90vh] right-[5.5rem]  h-20 bg-primary-dark rounded-l-xl  "
+         absolute flex items-center justify-items-center align-middle    justify-between   w-fit  top-[90vh] right-[5.5rem]  h-20 bg-secondary-dark rounded-l-xl  "
       >
         <motion.div
           animate={{ visibility: show ? "visible" : "hidden" }}
@@ -48,7 +49,7 @@ export default function Share() {
       </motion.div>
       <div
         className="flex w-20  absolute  items-center justify-center
-top-[90vh] right-5  h-20 bg-primary-dark rounded-xl cursor-pointer"
+top-[90vh] right-5  h-20 bg-secondary-dark rounded-xl cursor-pointer"
         onClick={() => {
           setShow(!show);
           console.log(document.URL);

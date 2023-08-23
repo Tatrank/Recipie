@@ -3,15 +3,11 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import RecepiCard from "@/components/RecepiCard";
 import { FullRecepi } from "@/types";
-import CryptoJS from "@/lib/encryption";
 import { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Uživatel",
 };
-export default function Page({ params }: { params: { user: string[] } }) {
-  const fullUrl = decodeURIComponent(params.user.toString()).replace(",", "/");
-  const bytes = CryptoJS.AES.decrypt(fullUrl, "secret key 123");
-  const originalMail = bytes.toString(CryptoJS.enc.Utf8);
+export default function Page({ params }: { params: { user: string } }) {
 
   const targetRef = useRef<HTMLDivElement>(null);
 
@@ -22,7 +18,7 @@ export default function Page({ params }: { params: { user: string[] } }) {
   useEffect(() => {
     console.log(noMoreFetches);
     fetch(
-      `http://localhost:3000/api/userRecipe?page=${page}&userEmail=${originalMail}`
+      `http://localhost:3000/api/userRecipe?page=${page}&userEmail=${params.user}`
     )
       .then((res) => {
         return res.json();

@@ -4,7 +4,6 @@ import { useEffect, useRef, useState } from "react";
 import { UserType } from "@/types";
 import Link from "next/link";
 import UserCard from "@/components/UserCard";
-import CryptoJS from "@/lib/encryption";
 
 import { Metadata } from "next";
 export const metadata: Metadata = {
@@ -66,13 +65,9 @@ export default function Page() {
       {data.length ? (
         <div className="flex flex-wrap justify-center h-fit w-9/10">
           {data.map((item: UserType) => {
-            let mail = CryptoJS.AES.encrypt(
-              item.email,
-              "secret key 123"
-            ).toString();
             return (
               <div key={item.id} className="w-fit m-20 h-fit">
-                <Link href={`/recipe/user/public/${mail}`}>
+                <Link href={`/recipe/user/public/${item.id}`}>
                   <UserCard data={item}></UserCard>
                 </Link>
               </div>

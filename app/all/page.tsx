@@ -32,6 +32,11 @@ export default function Page({
 
   const [json, setJSON] = useState<FullRecepi[]>([]);
   useEffect(() => {
+    setNoMoreFetches(false);
+    setJSON([]);
+    setPage(0);
+  }, [searchParams]);
+  useEffect(() => {
     console.log(noMoreFetches);
     fetch(
       `http://localhost:3000/api/getRecepi?page=${page}${

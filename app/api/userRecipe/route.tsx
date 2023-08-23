@@ -18,8 +18,12 @@ export async function GET(req: Request) {
     });
     return Response.json(data);
   }
+
+  if (!query) {
+    return Response.json({});
+  }
   const data = await db.recipe.findMany({
-    where: { user: { email: query } },
+    where: { user: { id: query } },
     include: {
       categories: true,
       likes: true,

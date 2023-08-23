@@ -20,7 +20,7 @@ export default function RemoveComment({ commentId }: { commentId: string }) {
           router.refresh();
         }}
       >
-        Smazat komentář
+        Smazat
       </motion.div>
     </>
   );

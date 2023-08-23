@@ -70,7 +70,7 @@ export default function AddComment({
         <motion.div
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
-          whileHover={{ scale: 1.2 }}
+          whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.8 }}
           className="md:p-4 p-2 bg-background-dark rounded-3xl text-xl md:text-3xl hover:cursor-pointer"
           onClick={handleSubmit}
@@ -85,7 +85,7 @@ export default function AddComment({
         }}
         placeholder="Vyjádřete se"
         name="commentText"
-        className="w-full min-h-[6 rem] rounded-lg text-3xl h-fit p-7 bg-background-dark "
+        className="w-full min-h-[6 rem] rounded-lg text-2xl h-fit p-7 bg-background-dark "
       ></TextareaAutosize>
     </div>
   );

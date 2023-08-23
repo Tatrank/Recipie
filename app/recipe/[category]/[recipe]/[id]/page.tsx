@@ -1,5 +1,4 @@
 import { FullRecepi } from "@/types";
-import { get } from "http";
 import Link from "next/link";
 import RemoveComment from "@/components/RemoveComment";
 import AddComment from "@/components/AddComment";
@@ -7,8 +6,6 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import LikeButton from "@/components/LikeButton";
 import CryptoJS from "@/lib/encryption";
-
-import type { Metadata, ResolvingMetadata } from "next";
 
 export async function generateMetadata({
   params,
@@ -20,7 +17,7 @@ export async function generateMetadata({
   // fetch data
 
   return {
-    title: params.recipe,
+    title: decodeURI(params.recipe as string),
   };
 }
 
@@ -37,10 +34,7 @@ export default async function page({
   );
   const session = await getServerSession(authOptions);
   const json: FullRecepi = await data.json();
-  const mail = CryptoJS.AES.encrypt(
-    json.user.email,
-    "secret key 123"
-  ).toString();
+  const mail = CryptoJS.AES.encrypt(json.user.email, "s").toString();
   return (
     <div
       className="m-[-2.5rem] mb-[-9rem] sticky top-0 left-0 mt-[-7.5rem] w-[100vw] min-h-[1440px] "
@@ -62,7 +56,7 @@ export default async function page({
             )}
           </div>
           <div className="flex flex-wrap  justify-between justify-items-center items-center w-full h-fit md:h-52 my-10 ">
-            <div className="bg-primary-dark h-10 md:h-20 my-4 md:my-0 flex justify-between rounded-full w-[600px]">
+            <div className="bg-primary-dark h-10 md:h-20 my-4 md:my-0 flex justify-between rounded-full w-[600px] border-2 border-secondary-dark">
               <div className="px-4 flex justify-center items-center w-fit min-w-[8rem] h-full rounded-full bg-background-dark text-xl md:text-3xl">
                 Přidal
               </div>
@@ -73,15 +67,15 @@ export default async function page({
                 </Link>
               </div>
             </div>
-            <div className="bg-primary-dark h-10 md:h-20 my-4 md:my-0 flex justify-between rounded-full w-[600px]">
+            <div className="bg-primary-dark h-10 md:h-20 my-4 md:my-0 flex border-2 border-secondary-dark justify-between rounded-full w-[600px]">
               <div className="px-4 flex justify-center items-center w-fit min-w-[8rem] h-full rounded-full bg-background-dark text-xl md:text-3xl">
                 Publikováno
               </div>
-              <div className="flex justify-center items-center px-5  text-xl md:text-3xl">
+              <div className="flex justify-center items-center px-5   text-xl md:text-3xl">
                 {json.published.substring(0, 10)}
               </div>
             </div>
-            <div className="bg-primary-dark h-10 md:h-20 my-4 md:my-0 flex justify-between rounded-full w-[600px]">
+            <div className="bg-primary-dark h-10 md:h-20 my-4 md:my-0 flex justify-between rounded-full w-[600px] border-2 border-secondary-dark">
               <div className="px-4 flex justify-center items-center w-fit min-w-[8rem] h-full rounded-full bg-background-dark text-xl md:text-3xl">
                 Obtížnost
               </div>
@@ -89,7 +83,7 @@ export default async function page({
                 {json.difficulty}
               </div>
             </div>
-            <div className="bg-primary-dark h-10 md:h-20 my-4 md:my-0 flex justify-between rounded-full w-[600px]">
+            <div className="bg-primary-dark h-10 md:h-20 my-4 md:my-0 flex justify-between border-2 border-secondary-dark rounded-full w-[600px]">
               <div className="px-4 flex justify-center items-center w-fit min-w-[8rem] h-full rounded-full bg-background-dark text-xl md:text-3xl">
                 Likes
               </div>
@@ -98,7 +92,7 @@ export default async function page({
               </div>
             </div>
           </div>
-          <div className="bg-primary-dark min-h-[10] md:h-20 flex justify-between rounded-full w-full">
+          <div className="bg-primary-dark min-h-[10] md:h-20 flex justify-between rounded-full w-full border-2 border-secondary-dark">
             <div className="px-4 flex justify-center items-center w-fit min-w-[8rem] h-full rounded-full bg-background-dark text-xl md:text-3xl">
               Kategorie
             </div>
@@ -108,7 +102,7 @@ export default async function page({
               })}
             </div>
           </div>
-          <div className="md:w-2/3 w-full h-fit m-10 p-8 flex items-center flex-col  bg-primary-dark rounded-3xl">
+          <div className="md:w-2/3 w-full h-fit m-10 p-8 flex items-center flex-col  bg-primary-dark rounded-3xl border-2 border-secondary-dark">
             <div className="px-4 flex justify-center items-center w-fit min-w-[8rem] h-24 mb-10 rounded-full bg-background-dark text-3xl">
               Ingredience
             </div>
@@ -129,7 +123,7 @@ export default async function page({
               </div>
             </div>
           </div>
-          <div className="w-full h-fit p-8 m-10 flex items-center flex-col  bg-primary-dark rounded-3xl">
+          <div className="w-full h-fit p-8 m-10 flex items-center flex-col  bg-primary-dark rounded-3xl border-2 border-secondary-dark">
             <div className="px-4 flex justify-center items-center w-fit min-w-[8rem] h-16 mb-10 rounded-full bg-background-dark text-3xl">
               Příprava
             </div>
@@ -148,14 +142,10 @@ export default async function page({
             ></AddComment>
           )}
           {json.comments.map((item) => {
-            let mailComment = CryptoJS.AES.encrypt(
-              item.User.email,
-              "secret key 123"
-            ).toString();
             return (
               <div
                 key={item.id}
-                className="flex my-4 flex-wrap bg-primary-dark w-full p-5 h-fit rounded-3xl"
+                className="flex my-4 flex-wrap border-2 border-secondary-dark bg-primary-dark w-full p-5 h-fit rounded-3xl"
               >
                 <div className="flex mb-3 w-full justify-between items-center">
                   <div className=" flex justify-between justify-items-center items-center h-14 w-[14rem] overflow-hidden">
@@ -166,14 +156,14 @@ export default async function page({
                         src={item.User.image!}
                       ></img>
                     </div>
-                    <Link href={`/recipe/user/public/${mailComment}`}>
+                    <Link href={`/recipe/user/public/${item.User.id}`}>
                       <div className="w-[13rem]  h-9 flex justify-end p-3 rounded-2xl z-0 text-lg items-center bg-background-dark">
                         {item.User.name}
                       </div>
                     </Link>
                   </div>
                   {session?.user?.email == item.User.email ? (
-                    <div className="md:p-4 p-2 bg-background-dark rounded-3xl text-xl md:text-3xl hover:cursor-pointer">
+                    <div className="md:p-4 p-2 bg-background-dark rounded-3xl text-lg md:text-3xl hover:cursor-pointer">
                       <RemoveComment commentId={item.id}></RemoveComment>
                     </div>
                   ) : (
@@ -181,7 +171,7 @@ export default async function page({
                   )}
                 </div>
                 <div
-                  className="w-full min-h-[6 rem] rounded-lg text-3xl h-fit p-7 bg-background-dark "
+                  className="w-full min-h-[6 rem] rounded-lg text-xl h-fit p-7 bg-background-dark "
                   id="comment"
                 >
                   {item.text}
