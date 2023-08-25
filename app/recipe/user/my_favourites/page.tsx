@@ -6,10 +6,18 @@ import RecepiCard from "@/components/RecepiCard";
 import { FullRecepi } from "@/types";
 import { Metadata } from "next";
 import { useEffect, useRef, useState } from "react";
+import { LoadingAnimated } from "@/components/LoadingAnimated";
+import OrderBar from "@/components/OrderBar";
 export const metadata: Metadata = {
   title: "Moje oblíbené",
 };
-export default function Page() {
+export default function Page({
+  searchParams,
+}: {
+  searchParams: {
+    orderBy: string | undefined;
+  };
+}) {
   const targetRef = useRef<HTMLDivElement>(null);
 
   const { data: session } = useSession({
@@ -21,24 +29,38 @@ export default function Page() {
 
   const [noMoreFetches, setNoMoreFetches] = useState(false);
   const [page, setPage] = useState(0);
-
+  const [loadin, setLoading] = useState(true);
+  const [firstFetch, setFirstFetch] = useState(true);
   const [json, setJSON] = useState<FullRecepi[]>([]);
   useEffect(() => {
-    console.log(noMoreFetches);
-    fetch(
-      `http://localhost:3000/api/getFavourites?page=${page}&userEmail=${session?.user?.email}`
-    )
-      .then((res) => {
-        return res.json();
-      })
-      .then((res) => {
-        if (res.length === 0) {
-          setNoMoreFetches(true);
-          return;
-        }
-        setJSON((prevData) => [...prevData, ...res]);
-      });
-  }, [page]);
+    setNoMoreFetches(false);
+    setJSON([]);
+    setPage(0);
+    setFirstFetch(true);
+  }, [searchParams.orderBy]);
+
+  useEffect(() => {
+    if (session) {
+      console.log(page);
+      setLoading(true);
+      fetch(
+        `http://localhost:3000/api/getFavourites?page=${page}&userEmail=${session?.user?.email}&orderBy=${searchParams.orderBy}`
+      )
+        .then((res) => {
+          return res.json();
+        })
+        .then((res) => {
+          setLoading(false);
+          setFirstFetch(false);
+          if (res.length === 0) {
+            setNoMoreFetches(true);
+            return;
+          }
+          console.log(res);
+          setJSON((prevData) => [...prevData, ...res]);
+        });
+    }
+  }, [page, searchParams, session]);
 
   useEffect(() => {
     console.log("změna targetu");
@@ -51,7 +73,7 @@ export default function Page() {
         console.log("Intersection Observer fired", entries);
         const entry = entries[0];
 
-        if (entry.isIntersecting && !noMoreFetches) {
+        if (entry.isIntersecting && !noMoreFetches && !firstFetch && !loadin) {
           console.log(page);
           setPage((prevPage) => prevPage + 1);
         }
@@ -68,10 +90,14 @@ export default function Page() {
     return () => {
       observer.unobserve(target);
     };
-  }, [targetRef, noMoreFetches]);
+  }, [targetRef, noMoreFetches, firstFetch, loadin]);
 
   return (
-    <>
+    <div
+      className="flex flex-col items-center justify-center
+    "
+    >
+      <OrderBar url={`/recipe/user/my_favourites`}></OrderBar>
       {json.length ? (
         <div className="flex flex-wrap justify-center h-fit w-9/10">
           {json.map((item: FullRecepi) => (
@@ -84,7 +110,7 @@ export default function Page() {
             </div>
           ))}
         </div>
-      ) : (
+      ) : !loadin ? (
         <div className="text-3xl flex justify-center items-center">
           Tady zatím nic není.
           <Link href={"/all"}>
@@ -93,8 +119,20 @@ export default function Page() {
             </div>
           </Link>
         </div>
+      ) : (
+        <div
+          className={`flex m-[-2.5rem] justify-center items-center  w-[100vw] min-h-[1440px] h-[100vh] bg-black bg-opacity-40 sticky top-0  left-0 
+       
+          `}
+        >
+          <div className="flex justify-center  w-full h-[100vh] ">
+            <LoadingAnimated></LoadingAnimated>
+          </div>
+        </div>
       )}
+      {loadin && <LoadingAnimated></LoadingAnimated>}
+
       <div ref={targetRef}></div>
-    </>
+    </div>
   );
 }

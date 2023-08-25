@@ -23,26 +23,35 @@ export default function Share() {
           padding: show ? "0.5rem" : 0,
         }}
         className="z-50 overflow-hidden
-         absolute flex items-center justify-items-center align-middle    justify-between   w-fit  top-[90vh] right-[5.5rem]  h-20 bg-secondary-dark rounded-l-xl  "
+         absolute flex items-center justify-items-center align-middle md:rotate-0 rotate-90 origin-right   justify-between   w-fit  md:top-[90vh] top-[87vh] right-[3.75rem]  md:right-[5.5rem]   h-20 bg-secondary-dark rounded-l-xl  "
       >
         <motion.div
           animate={{ visibility: show ? "visible" : "hidden" }}
           className="flex, flex-nowrap w-64 h-fit"
         >
           <FacebookShareButton
-            className="m-2"
+            className="m-2 rotate-[-90deg] md:rotate-0"
             url={"window.location.href"}
             quote="fasf"
           >
             <FacebookIcon size={48}></FacebookIcon>
           </FacebookShareButton>
-          <TumblrShareButton className="m-2" url={document.URL}>
+          <TumblrShareButton
+            className="m-2 rotate-[-90deg] md:rotate-0"
+            url={document.URL}
+          >
             <TumblrIcon size={48}></TumblrIcon>
           </TumblrShareButton>
-          <WhatsappShareButton className="m-2" url={document.URL}>
+          <WhatsappShareButton
+            className="m-2 rotate-[-90deg] md:rotate-0"
+            url={document.URL}
+          >
             <WhatsappIcon size={48}></WhatsappIcon>
           </WhatsappShareButton>
-          <TwitterShareButton className="m-2" url={document.URL}>
+          <TwitterShareButton
+            className="m-2 rotate-[-90deg] md:rotate-0"
+            url={document.URL}
+          >
             <TwitterIcon size={48}></TwitterIcon>
           </TwitterShareButton>
         </motion.div>
