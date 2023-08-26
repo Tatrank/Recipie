@@ -15,8 +15,7 @@ export default function DeleteButton({ id }: { id: string }) {
               method: "DELETE",
             }
           );
-          router.refresh();
-          console.log(deletes);
+
           if (deletes.status == 200) {
             router.refresh();
           }

@@ -148,20 +148,21 @@ export default async function page({
                 className="flex my-4 flex-wrap border-2 border-secondary-dark bg-primary-dark w-full p-5 h-fit rounded-3xl"
               >
                 <div className="flex mb-3 w-full justify-between items-center">
-                  <div className=" flex justify-between justify-items-center items-center h-14 w-[14rem] overflow-hidden">
-                    <div></div>
-                    <div className="border absolute z-10 rounded-full border-secondary-dark">
-                      <img
-                        className="w-12 h-12 rounded-full "
-                        src={item.User.image!}
-                      ></img>
-                    </div>
-                    <Link href={`/recipe/user/public/${item.User.id}`}>
-                      <div className="w-[13rem]  h-9 flex justify-end p-3 rounded-2xl z-0 text-lg items-center bg-background-dark">
+                  <Link href={`/recipe/user/public/${item.User.id}`}>
+                    <div className=" flex justify-between justify-items-center items-center h-14 w-[14rem] overflow-hidden">
+                      <div className="absolute md:static"></div>
+                      <div className="md:visible hidden border absolute z-10 rounded-full border-secondary-dark">
+                        <img
+                          className="w-12 h-12 rounded-full "
+                          src={item.User.image!}
+                        ></img>
+                      </div>
+
+                      <div className="md:w-[13rem]  h-9 flex justify-end p-3 rounded-2xl z-0 text-lg items-center bg-background-dark">
                         {item.User.name}
                       </div>
-                    </Link>
-                  </div>
+                    </div>
+                  </Link>
                   {session?.user?.email == item.User.email ? (
                     <div className="md:p-4 p-2 bg-background-dark rounded-3xl text-lg md:text-3xl hover:cursor-pointer">
                       <RemoveComment commentId={item.id}></RemoveComment>

@@ -107,6 +107,7 @@ export default function Page({
         </div>
       )}
       <OrderBar
+      selected={searchParams.orderBy}
         url={`/all${
           searchParams.searchParams
             ? "&searchParams=" + searchParams.searchParams

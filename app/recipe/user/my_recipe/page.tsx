@@ -6,21 +6,34 @@ import RecepiCard from "@/components/RecepiCard";
 import { FullRecepi } from "@/types";
 import DeleteButton from "@/components/DeletButton";
 import { Metadata } from "next";
+import OrderBar from "@/components/OrderBar";
 export const metadata: Metadata = {
   title: "Moje recepty",
 };
-export default async function Page() {
+export default async function Page({
+  searchParams,
+}: {
+  searchParams: { orderBy: string };
+}) {
   const session = await getServerSession(authOptions);
 
   if (!session) {
-    redirect("/api/auth/signin?callbackURL=/post_recipe");
+    redirect("/api/auth/signin?callbackURL=/recipe/user/my_recipe");
   }
   const data = await fetch(
-    `http://localhost:3000/api/userRecipe?userEmail=${session.user?.email}`
+    `http://localhost:3000/api/userRecipe?userEmail=${session.user?.email}&page=0&my=true&orderBy=${searchParams.orderBy}`,
+    { cache: "no-store" }
   );
   const json: FullRecepi[] = await data.json();
   return (
-    <>
+    <div
+      className="flex flex-col items-center justify-center
+    "
+    >
+      <OrderBar
+        selected={searchParams.orderBy}
+        url="/recipe/user/my_recipe"
+      ></OrderBar>
       {json.length ? (
         <div className="flex flex-wrap justify-center h-fit w-9/10">
           {json.map((item: FullRecepi) => (
@@ -46,6 +59,6 @@ export default async function Page() {
           </Link>
         </div>
       )}
-    </>
+    </div>
   );
 }

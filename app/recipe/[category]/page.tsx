@@ -101,7 +101,7 @@ export default function Page({
       <div className="flex text-center justify-center w-[100vw] items-center h-20 text-4xl">
         Nyní prohlížíte {params.category} kategorii
       </div>
-      <OrderBar url={`/recipe/${params.category}`}></OrderBar>
+      <OrderBar selected={searchParams.orderBy} url={`/recipe/${params.category}`}></OrderBar>
 
       {json.length ? (
         <div className="flex flex-wrap justify-center h-fit w-9/10">

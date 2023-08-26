@@ -4,26 +4,51 @@ import { utapi } from "uploadthing/server";
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
   const query_params = parseInt(searchParams.get("page")!);
-
+  const where = searchParams.get("my");
   const query = searchParams.get("userEmail");
-  if (Number.isNaN(query_params)) {
+  const order = searchParams.get("orderBy");
+  const search = where
+    ? { user: { email: query as string } }
+    : { user: { id: query as string } };
+  let orderObject = {};
+  switch (order) {
+    case "likesAsc":
+      orderObject = { likes: { _count: "asc" } };
+      break;
+    case "likesDesc":
+      orderObject = { likes: { _count: "desc" } };
+      break;
+    case "nameAsc":
+      orderObject = { name: "asc" };
+      break;
+    case "nameDesc":
+      orderObject = { name: "desc" };
+      break;
+    case "dateAsc":
+      orderObject = { published: "asc" };
+      break;
+    case "dateDesc":
+      orderObject = { published: "desc" };
+      break;
+  }
+  console.log(orderObject);
+  console.log(search)
+  
+  if (where) {
     const data = await db.recipe.findMany({
-      where: { user: { email: query } },
+      where: search,
       include: {
         categories: true,
         likes: true,
         groceries_measueres: true,
         user: true,
       },
+      orderBy: orderObject,
     });
     return Response.json(data);
   }
-
-  if (!query) {
-    return Response.json({});
-  }
   const data = await db.recipe.findMany({
-    where: { user: { id: query } },
+    where: search,
     include: {
       categories: true,
       likes: true,
@@ -32,6 +57,7 @@ export async function GET(req: Request) {
     },
     take: 12,
     skip: 12 * query_params,
+    orderBy: orderObject,
   });
   return Response.json(data);
 }

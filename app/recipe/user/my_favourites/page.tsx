@@ -97,7 +97,7 @@ export default function Page({
       className="flex flex-col items-center justify-center
     "
     >
-      <OrderBar url={`/recipe/user/my_favourites`}></OrderBar>
+      <OrderBar selected={searchParams.orderBy} url={`/recipe/user/my_favourites`}></OrderBar>
       {json.length ? (
         <div className="flex flex-wrap justify-center h-fit w-9/10">
           {json.map((item: FullRecepi) => (
