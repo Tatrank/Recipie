@@ -70,9 +70,11 @@ export default function CategoryBar() {
           Prohlížet profily
         </motion.div>
       </Link>
-      <div className="flex justify-center  items-center w-full h-32 border-1 border border-secondary-dark bg-background-dark  text-4xl">
-        Kategorie
-      </div>
+      <Link href="/category">
+        <div className="flex justify-center  items-center w-full h-32 border-1 border border-secondary-dark bg-background-dark  text-4xl">
+          Kategorie
+        </div>
+      </Link>
       <div>
         <Link href={`/all`}>
           <motion.div

@@ -10,7 +10,7 @@ export default function OrderBar({
   return (
     <div className="overflow-hidden rounded-lg lg:rounded-full border-2 border-secondary-dark mt-16  lg:w-[70rem] lg:h-16 bg-accent-light flex lg:flex-row flex-col w-72 h-96 items-center">
       <Link
-        className="lg:w-1/6 w-full h-1/6  border-r-secondary-dark border-r-2  lg:h-full"
+        className="lg:w-1/6 w-full h-1/6  border-secondary-dark md:border-b-0 md:border-r-2 border-b-2  lg:h-full"
         href={`${url}?orderBy=nameAsc`}
       >
         <div
@@ -22,7 +22,7 @@ export default function OrderBar({
         </div>
       </Link>
       <Link
-        className="lg:w-1/6 w-full h-1/6 border-r-2 border-r-secondary-dark  lg:h-full"
+        className="lg:w-1/6 w-full h-1/6 border-secondary-dark md:border-b-0 md:border-r-2 border-b-2  lg:h-full"
         href={`${url}?orderBy=nameDesc
         `}
       >
@@ -35,7 +35,7 @@ export default function OrderBar({
         </div>
       </Link>
       <Link
-        className="lg:w-1/6 w-full h-1/6 border-r-2 border-r-secondary-dark  lg:h-full"
+        className="lg:w-1/6 w-full h-1/6 border-secondary-dark md:border-b-0 md:border-r-2 border-b-2  lg:h-full"
         href={`${url}?orderBy=likesDesc`}
       >
         <div
@@ -47,7 +47,7 @@ export default function OrderBar({
         </div>
       </Link>
       <Link
-        className="lg:w-1/6 w-full h-1/6 border-r-2 border-r-secondary-dark  lg:h-full"
+        className="lg:w-1/6 w-full h-1/6 border-secondary-dark md:border-b-0 md:border-r-2 border-b-2  lg:h-full"
         href={`${url}?orderBy=likesAsc `}
       >
         <div
@@ -59,7 +59,7 @@ export default function OrderBar({
         </div>
       </Link>
       <Link
-        className="lg:w-1/6 w-full h-1/6 border-r-2 border-r-secondary-dark  lg:h-full"
+        className="lg:w-1/6 w-full h-1/6 border-secondary-dark md:border-b-0 md:border-r-2 border-b-2 lg:h-full"
         href={`${url}?orderBy=dateAsc`}
       >
         <div

@@ -107,7 +107,7 @@ export default function Page({
         </div>
       )}
       <OrderBar
-      selected={searchParams.orderBy}
+        selected={searchParams.orderBy}
         url={`/all${
           searchParams.searchParams
             ? "&searchParams=" + searchParams.searchParams
@@ -133,8 +133,10 @@ export default function Page({
         <div className="text-3xl my-7">Tady nic není</div>
       ) : (
         <div
-          className={`flex m-[-8rem] justify-center items-center  w-[100vw] min-h-[1440px] h-[100vh] bg-black bg-opacity-40 sticky top-0  left-0 ${
-            loadin && searchParams.searchParams ? "my-[-13rem]" : ""
+          className={`flex md:m-[-10.5rem] m-[-30.5rem] justify-center items-center  w-[100vw] min-h-[1440px] h-[100vh] bg-black bg-opacity-40 sticky top-0  left-0 ${
+            loadin && searchParams.searchParams
+              ? "md:my-[-15.5rem] my-[-35.5rem]"
+              : ""
           }`}
         >
           <div className="flex justify-center  w-full h-[100vh] ">

@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 import { UploadButton } from "@/lib/uploadthing";
 import "@uploadthing/react/styles.css";
 import { motion } from "framer-motion";
+import Alert from "./Alert";
 interface FormData {
   name: string;
   difficulty: string;
@@ -24,6 +25,8 @@ export default function Form(): JSX.Element {
   const { data: session, status } = useSession();
   const router = useRouter();
   const [useableUpload, setUseableUpload] = useState(true);
+  const [alert, setAlert] = useState(false);
+  const [alertText, setAlertText] = useState<string>("");
   const [formData, setFormData] = useState<FormData>({
     name: "",
     difficulty: "",
@@ -58,37 +61,45 @@ export default function Form(): JSX.Element {
       formData.groceries_measueres[0][0] === "" ||
       formData.groceries_measueres[0][1] === ""
     ) {
-      alert("Vyplňte všechna data");
+      setAlert(true);
+      setAlertText("Vyplňte všechna pole");
       return;
     }
     if (formData.name.length >= 25) {
-      alert("Zkraťte jméno receptu");
+      setAlert(true);
+      setAlertText("Zkraťte jméno receptu");
       return;
     }
     if (formData.difficulty.length >= 25) {
-      alert("Zkraťte obtížnost receptu");
+      setAlert(true);
+      setAlertText("Zkraťte obtížnost receptu");
       return;
     }
     if (formData.description.length >= 200) {
-      alert("Zkraťte obsah receptu");
+      setAlert(true);
+      setAlertText("Zkraťte obsah receptu");
       return;
     }
     if (formData.time_difficulty.length >= 20) {
-      alert("Zkraťte délku času receptu");
+      setAlert(true);
+      setAlertText("Zkraťte délku času receptu");
       return;
     }
 
     if (formData.stepByStep.length >= 1000) {
-      alert("Zkraťte délku receptu");
+      setAlert(true);
+      setAlertText("Zkraťte délku receptu");
       return;
     }
 
     if (formData.category.length >= 6) {
-      alert("Hodně kategorií");
+      setAlert(true);
+      setAlertText("Hodně kategorií");
       return;
     }
-    if (formData.groceries_measueres.length >= 6) {
-      alert("Hodně surovin");
+    if (formData.groceries_measueres.length >= 30) {
+      setAlert(true);
+      setAlertText("Hodně surovin");
       return;
     }
     try {
@@ -107,11 +118,13 @@ export default function Form(): JSX.Element {
           `http://localhost:3000/recipe/${res.categories[0].name}/${res.name}/${res.id}`
         );
       } else {
-        alert("něco se nepovedlo");
+        setAlert(true);
+        setAlertText("něco se nepovedlo");
         console.error("Error adding recipe");
       }
     } catch (error) {
-      alert("něco se nepovedlo");
+      setAlert(true);
+      setAlertText("něco se nepovedlo");
       console.error("An error occurred:", error);
     }
   }
@@ -157,7 +170,7 @@ export default function Form(): JSX.Element {
   }
 
   function addGroceriesAndMesuerements(index: number) {
-    if (formData.groceries_measueres.length >= 20) {
+    if (formData.groceries_measueres.length >= 30) {
       return;
     }
     if (index + 1 === formData.groceries_measueres.length) {
@@ -169,204 +182,228 @@ export default function Form(): JSX.Element {
   }
 
   return (
-    <div className="p-4 flex justify-center w-[1000px]">
-      <div className="w-full  ">
-        <motion.div
-          initial={{ scale: 0 }}
-          animate={{ scale: 1 }}
-          className="mb-4"
-        >
-          <label className="block font-bold">Jméno</label>
-          <input
-            type="text"
-            name="name"
-            value={formData.name}
-            onChange={handleInputChange}
-            placeholder="Zadejejte svoje jméno"
-            className="w-full
- bg-background-dark rounded border-secondary-dark bg-opacity-0 p-2"
-            required
-          />
-        </motion.div>
-        {useableUpload ? (
-          <UploadButton
-            endpoint="imageUploader"
-            onClientUploadComplete={(res) => {
-              console.log(res);
-              setUseableUpload(false);
-              if (res)
-                setFormData((prevData) => ({
-                  ...prevData,
-                  image_url: res[0].url,
-                  image_key: res[0].key,
-                }));
-            }}
-            onUploadError={(error: Error) => {
-              alert(`ERROR! ${error.message}`);
-            }}
-          />
-        ) : (
-          <div className="w-full flex flex-col justify-between items-center">
-            <motion.img
-              initial={{ scale: 0 }}
-              animate={{ scale: 1 }}
-              src={formData.image_url}
-              alt="Recipe"
-            />
-            <motion.button
-              whileHover={{ scale: 1.3 }}
-              onClick={async () => {
-                await fetch(
-                  `http://localhost:3000/api/deleteImage?imageId=${formData.image_key}`,
-                  { method: "DELETE" }
-                );
-                setUseableUpload(true);
-              }}
-              className="w-24
-bg-primary-dark rounded p-2 mt-2 cursor-pointer"
-            >
-              Změnit obrázek
-            </motion.button>
-          </div>
-        )}
-
-        <motion.div
-          initial={{ scale: 0 }}
-          animate={{ scale: 1 }}
-          className="mt-4"
-        >
-          <label className="block font-bold">Description</label>
-          <TextareaAutosize
-            name="description"
-            value={formData.description}
-            onChange={(e) => {
-              const { value, name } = e.target;
-              setFormData((prevData) => ({ ...prevData, [name]: value }));
-            }}
-            placeholder="Enter difficulty of meal"
-            className="w-full min-h-[10rem] bg-background-dark rounded border-secondary-dark bg-opacity-0 p-2"
-            required
-          />
-        </motion.div>
-        <motion.div
-          initial={{ scale: 0 }}
-          animate={{ scale: 1 }}
-          className="mt-4"
-        >
-          <label className="block font-bold">Difficulty</label>
-          <input
-            type="text"
-            name="difficulty"
-            value={formData.difficulty}
-            onChange={handleInputChange}
-            placeholder="Enter difficulty of meal"
-            className="w-full
- bg-background-dark rounded border-secondary-dark bg-opacity-0 p-2"
-            required
-          />
-        </motion.div>
-        <motion.div
-          initial={{ scale: 0 }}
-          animate={{ scale: 1 }}
-          className="mt-4"
-        >
-          <label className="block font-bold">Time difficulty</label>
-          <input
-            type="text"
-            name="time_difficulty"
-            value={formData.time_difficulty}
-            onChange={handleInputChange}
-            placeholder="Enter time difficulty of meal"
-            className="w-full
- bg-background-dark rounded border-secondary-dark bg-opacity-0 p-2"
-            required
-          />
-        </motion.div>
-        <motion.div
-          initial={{ scale: 0 }}
-          animate={{ scale: 1 }}
-          className="mt-4"
-        >
-          <label className="block font-bold">Step by step</label>
-          <TextareaAutosize
-            className="w-full min-h-[15rem] bg-background-dark rounded border-secondary-dark bg-opacity-0 p-2"
-            name="stepByStep"
-            value={formData.stepByStep}
-            onChange={(e) => {
-              const { value, name } = e.target;
-              setFormData((prevData) => ({ ...prevData, [name]: value }));
-            }}
-            placeholder="Enter step by step of cooking the meal"
-            required
-          />
-        </motion.div>
-        {formData.category.map((item, index) => (
-          <motion.div
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            className="mt-4"
-            key={index}
-          >
-            <label className="block font-bold">Category {index + 1}</label>
-            <input
-              type="text"
-              name={`category_${index}`}
-              value={formData.category[index]}
-              onChange={handleInputChange}
-              placeholder="Category"
-              onClick={() => {
-                addCategory(index);
-              }}
-              className="w-full
- bg-background-dark rounded border-secondary-dark bg-opacity-0 p-2"
-              required
-            />
-          </motion.div>
-        ))}
-        {formData.groceries_measueres.map((item, index) => (
-          <motion.div
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            className="mt-4"
-            key={index}
-          >
-            <label className="block font-bold">Grocery {index + 1}</label>
-            <input
-              type="text"
-              name={`grocery_${index}`}
-              value={formData.groceries_measueres[index][0]}
-              onChange={handleInputChange}
-              placeholder="Grocery"
-              onClick={() => {
-                addGroceriesAndMesuerements(index);
-              }}
-              className="w-full
- bg-background-dark rounded border-secondary-dark bg-opacity-0 p-2"
-              required
-            />
-            <label className="block font-bold">Value {index + 1}</label>
-            <input
-              type="text"
-              name={`value_${index}`}
-              value={formData.groceries_measueres[index][1]}
-              onChange={handleInputChange}
-              placeholder="Value"
-              className="w-full
- bg-background-dark rounded border-secondary-dark bg-opacity-0 p-2"
-              required
-            />
-          </motion.div>
-        ))}
-        <div className="flex justify-center w-full">
-          <motion.button
-            whileHover={{ scale: 1.08 }}
-            onClick={handleSubmit}
-            className="mt-4 m-auto py-8  text-4xl px-16  bg-primary-dark rounded"
-          >
-            Submit
-          </motion.button>
+    <>
+      <div
+        onClick={() => {
+          setAlert(false);
+        }}
+        className="pointer sticky block  w-full top-72 md:top-40 left-0 "
+      >
+        <div className="absolute ">
+          {" "}
+          <Alert text={alertText} visibility={alert}></Alert>
         </div>
       </div>
-    </div>
+      <div className="p-4 flex flex-col items-center justify-center w-[1000px]">
+        <div className="w-full  ">
+          <motion.div
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            className="mb-4"
+          >
+            <label className="block font-bold">Jméno</label>
+            <input
+              type="text"
+              name="name"
+              value={formData.name}
+              onChange={handleInputChange}
+              placeholder="Zadejejte jméno pokrmu"
+              className="w-full
+ bg-background-dark rounded border-secondary-dark bg-opacity-0 p-2"
+              required
+            />
+          </motion.div>
+          {useableUpload ? (
+            <UploadButton
+              endpoint="imageUploader"
+              onClientUploadComplete={(res) => {
+                console.log(res);
+                setUseableUpload(false);
+                if (res)
+                  setFormData((prevData) => ({
+                    ...prevData,
+                    image_url: res[0].url,
+                    image_key: res[0].key,
+                  }));
+              }}
+              onUploadError={(error: Error) => {
+                setAlert(true);
+                setAlertText(`ERROR! ${error.message}`);
+              }}
+            />
+          ) : (
+            <div className="w-full flex flex-col justify-between items-center">
+              <motion.img
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                src={formData.image_url}
+                alt="Recipe"
+              />
+              <motion.button
+                whileHover={{ scale: 1.3 }}
+                onClick={async () => {
+                  await fetch(
+                    `http://localhost:3000/api/deleteImage?imageId=${formData.image_key}`,
+                    { method: "DELETE" }
+                  );
+                  setUseableUpload(true);
+                }}
+                className="w-24
+bg-primary-dark rounded p-2 mt-2 cursor-pointer"
+              >
+                Změnit obrázek
+              </motion.button>
+            </div>
+          )}
+
+          <motion.div
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            className="mt-4"
+          >
+            <label className="block font-bold">Popis</label>
+            <TextareaAutosize
+              name="description"
+              value={formData.description}
+              onChange={(e) => {
+                const { value, name } = e.target;
+                setFormData((prevData) => ({ ...prevData, [name]: value }));
+              }}
+              placeholder="Zadejte stručný popis jídla"
+              className="w-full min-h-[10rem] bg-background-dark rounded border-secondary-dark bg-opacity-0 p-2"
+              required
+            />
+          </motion.div>
+          <motion.div
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            className="mt-4"
+          >
+            <label className="block font-bold">Obtížnost</label>
+            <input
+              type="text"
+              name="difficulty"
+              value={formData.difficulty}
+              onChange={handleInputChange}
+              placeholder="Zadejte obtížnost jídla"
+              className="w-full
+ bg-background-dark rounded border-secondary-dark bg-opacity-0 p-2"
+              required
+            />
+          </motion.div>
+          <motion.div
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            className="mt-4"
+          >
+            <label className="block font-bold">Čas potřebný k přípravě</label>
+            <input
+              type="text"
+              name="time_difficulty"
+              value={formData.time_difficulty}
+              onChange={handleInputChange}
+              placeholder="Zadejte časovou obtížnost jídla"
+              className="w-full
+ bg-background-dark rounded border-secondary-dark bg-opacity-0 p-2"
+              required
+            />
+          </motion.div>
+          <motion.div
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            className="mt-4"
+          >
+            <label className="block font-bold">Krok za krokem</label>
+            <TextareaAutosize
+              className="w-full min-h-[15rem] bg-background-dark rounded border-secondary-dark bg-opacity-0 p-2"
+              name="stepByStep"
+              value={formData.stepByStep}
+              onChange={(e) => {
+                const { value, name } = e.target;
+                setFormData((prevData) => ({ ...prevData, [name]: value }));
+              }}
+              placeholder="Zadejte postup k přípravě vašeho receptu"
+              required
+            />
+          </motion.div>
+          <div className="my-20">
+            {formData.category.map((item, index) => (
+              <motion.div
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                className="mt-4"
+                key={index}
+              >
+                <label className="block font-bold">
+                  {index + 1}. Kategorie
+                </label>
+                <input
+                  type="text"
+                  name={`category_${index}`}
+                  value={formData.category[index]}
+                  onChange={handleInputChange}
+                  placeholder="Kategorie"
+                  onClick={() => {
+                    addCategory(index);
+                  }}
+                  className="w-full
+ bg-background-dark rounded border-secondary-dark bg-opacity-0 p-2"
+                  required
+                />
+              </motion.div>
+            ))}
+          </div>
+          <div className="my-20">
+            {formData.groceries_measueres.map((item, index) => (
+              <motion.div
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                className="mt-4"
+                key={index}
+              >
+                <label className="block font-bold mt-4">
+                  {index + 1}. Ingredience
+                </label>
+                <input
+                  type="text"
+                  name={`grocery_${index}`}
+                  value={formData.groceries_measueres[index][0]}
+                  onChange={handleInputChange}
+                  placeholder="Sem zadejte pouze název potřebné ingredience, množství pak do kolonky množství"
+                  onClick={() => {
+                    addGroceriesAndMesuerements(index);
+                  }}
+                  className="w-full
+ bg-background-dark rounded border-secondary-dark bg-opacity-0 p-2"
+                  required
+                />
+                <label className="block font-bold">
+                  Množství {index + 1}. ingredience
+                </label>
+                <input
+                  type="text"
+                  name={`value_${index}`}
+                  value={formData.groceries_measueres[index][1]}
+                  onChange={handleInputChange}
+                  placeholder="Množství"
+                  className="w-full
+ bg-background-dark rounded border-secondary-dark bg-opacity-0 p-2"
+                  required
+                />
+              </motion.div>
+            ))}
+          </div>
+          <div className="flex justify-center w-full">
+            <motion.button
+              whileHover={{ scale: 1.08 }}
+              onClick={handleSubmit}
+              className="mt-4 m-auto py-8  text-4xl px-16  bg-primary-dark rounded"
+            >
+              Odeslat
+            </motion.button>
+          </div>
+        </div>
+      </div>
+    </>
   );
 }

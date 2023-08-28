@@ -20,11 +20,12 @@ export function SearchBar() {
       className="w-[25rem] flex justify-between items-center  rounded-full h-10 bg-primary-light dark:bg-primary-dark"
     >
       <motion.input
+        placeholder="Máte něco konkrétního na mysli?"
         animate={{
           width: showSearch ? 0 : "25rem",
           paddingLeft: showSearch ? 0 : "0.75rem",
         }}
-        className="pl-3 rounded-full  h-9 bg-primary-dark text-text-dark"
+        className="pl-3 placeholder:text-text-dark rounded-full  h-9 bg-primary-dark text-text-dark"
         value={text!}
         onChange={(e) => {
           setText(e.target.value);

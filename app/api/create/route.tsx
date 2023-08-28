@@ -10,11 +10,10 @@ export async function POST(req: Request) {
     data.time_difficulty.length >= 20 ||
     data.stepByStep.length >= 1000 ||
     data.category.length >= 6 ||
-    data.groceries_measueres.length >= 6
+    data.groceries_measueres.length >= 30
   ) {
-    return NextResponse.json("unluko, jsem si se neměl dosta");
+    return NextResponse.json("unluko, jsem si se neměl dostat");
   }
- 
 
   const userID = await db.user.findUnique({
     where: { email: data.email },

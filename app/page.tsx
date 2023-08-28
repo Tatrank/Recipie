@@ -7,7 +7,7 @@ export default async function Page() {
   return (
     <>
       <div className="flex justify-center flex-wrap items-center w-full p-10">
-        <div className="m-10 md:text-7xl text-3xl flex justify-center w-full">
+        <div className="m-10 md:text-7xl text-center text-5xl flex justify-center w-full">
           Jedinečné stránky k prouzdání a vytváření receptů{" "}
         </div>
         <Link href={"/all"}>

@@ -28,7 +28,9 @@ export default function RootLayout({
               <SessionProvid>
                 <Share></Share>
                 <Navbar></Navbar>
-                <div className="flex justify-center p-10 pb-36">{children}</div>
+                <div className="flex justify-center flex-wrap p-10 pb-36">
+                  {children}
+                </div>
 
                 <Footer></Footer>
               </SessionProvid>

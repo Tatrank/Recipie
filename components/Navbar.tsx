@@ -27,7 +27,7 @@ backdrop-filter backdrop-blur-lg bg-opacity-10"
       <div className="z-50 flex justify-between justify-items-center flex-col md:flex-row items-center px-5 top-0 h-48 md:h-20   text-text-dark w-[100%] border-b border-secondary-dark   bg-background-dark sticky backdrop-filter backdrop-blur-lg bg-opacity-60 ">
         <div className="flex justify-between justify-items-center items-center h-14 w-[10rem]">
           <div
-            className="flex cursor-pointer items-center flex-col justify-evenly h-10"
+            className="flex cursor-pointer items-center flex-col justify-evenly h-[40px]"
             onClick={() => {
               setX(!x);
               setShowCategory(!showCategory);
@@ -40,14 +40,14 @@ backdrop-filter backdrop-blur-lg bg-opacity-10"
                 position: x ? "relative" : "static",
                 top: x ? 10 : 0,
               }}
-              className=" w-[2rem] bg-primary-dark h-1.5 rounded-sm"
+              className=" w-[32px] bg-primary-dark h-[6px] rounded-sm"
             ></motion.div>
             <motion.div
               animate={{
                 visibility: x ? "hidden" : "visible",
                 position: x ? "absolute" : "static",
               }}
-              className="w-[2rem] bg-primary-dark h-1.5 rounded-sm"
+              className="w-[32px] bg-primary-dark h-[6px] rounded-sm"
             ></motion.div>
             <motion.div
               animate={{
@@ -55,7 +55,7 @@ backdrop-filter backdrop-blur-lg bg-opacity-10"
                 position: x ? "relative" : "static",
                 top: x ? -5 : 0,
               }}
-              className="w-[2rem] bg-primary-dark h-1.5 rounded-sm"
+              className="w-[32px] bg-primary-dark h-[6px] rounded-sm"
             ></motion.div>
           </div>
           <div className="text-4xl">

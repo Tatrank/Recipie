@@ -150,8 +150,8 @@ export default async function page({
                 <div className="flex mb-3 w-full justify-between items-center">
                   <Link href={`/recipe/user/public/${item.User.id}`}>
                     <div className=" flex justify-between justify-items-center items-center h-14 w-[14rem] overflow-hidden">
-                      <div className="absolute md:static"></div>
-                      <div className="md:visible hidden border absolute z-10 rounded-full border-secondary-dark">
+                      <div className=" md:static absolute "></div>
+                      <div className=" hidden  border md:inline absolute z-10 rounded-full border-secondary-dark">
                         <img
                           className="w-12 h-12 rounded-full "
                           src={item.User.image!}
