@@ -26,6 +26,7 @@ export default function Form(): JSX.Element {
   const router = useRouter();
   const [useableUpload, setUseableUpload] = useState(true);
   const [alert, setAlert] = useState(false);
+  const [post, setPost] = useState(false)
   const [alertText, setAlertText] = useState<string>("");
   const [formData, setFormData] = useState<FormData>({
     name: "",
@@ -49,7 +50,7 @@ export default function Form(): JSX.Element {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-
+ setPost(true)
     // Check if any required input fields are empty
     if (
       formData.name === "" ||
@@ -61,43 +62,51 @@ export default function Form(): JSX.Element {
       formData.groceries_measueres[0][0] === "" ||
       formData.groceries_measueres[0][1] === ""
     ) {
+       setPost(false);
       setAlert(true);
       setAlertText("Vyplňte všechna pole");
       return;
     }
     if (formData.name.length >= 25) {
+       setPost(false);
       setAlert(true);
       setAlertText("Zkraťte jméno receptu");
       return;
     }
     if (formData.difficulty.length >= 25) {
       setAlert(true);
+       setPost(false);
       setAlertText("Zkraťte obtížnost receptu");
       return;
     }
     if (formData.description.length >= 200) {
+       setPost(false);
       setAlert(true);
       setAlertText("Zkraťte obsah receptu");
       return;
     }
     if (formData.time_difficulty.length >= 20) {
+       setPost(false);
       setAlert(true);
       setAlertText("Zkraťte délku času receptu");
       return;
     }
 
     if (formData.stepByStep.length >= 1000) {
+       setPost(false);
       setAlert(true);
       setAlertText("Zkraťte délku receptu");
       return;
     }
 
     if (formData.category.length >= 6) {
+       setPost(false);
       setAlert(true);
       setAlertText("Hodně kategorií");
       return;
     }
     if (formData.groceries_measueres.length >= 30) {
+       setPost(false);
       setAlert(true);
       setAlertText("Hodně surovin");
       return;
@@ -127,6 +136,7 @@ export default function Form(): JSX.Element {
       setAlertText("něco se nepovedlo");
       console.error("An error occurred:", error);
     }
+     setPost(false);
   }
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -395,6 +405,7 @@ bg-primary-dark rounded p-2 mt-2 cursor-pointer"
           </div>
           <div className="flex justify-center w-full">
             <motion.button
+            disabled={post}
               whileHover={{ scale: 1.08 }}
               onClick={handleSubmit}
               className="mt-4 m-auto py-8  text-4xl px-16  bg-primary-dark rounded"

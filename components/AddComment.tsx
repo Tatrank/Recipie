@@ -51,7 +51,7 @@ export default function AddComment({
   };
 
   return (
-    <div className="flex flex-wrap my-4 bg-primary-dark w-full p-5 h-fit rounded-3xl">
+    <div className="flex flex-wrap my-4 bg-primary-dark w-full border-2 border-secondary-dark p-5 h-fit rounded-3xl">
       <div className="flex mb-3 w-full justify-between items-center">
         <div className=" flex justify-between justify-items-center items-center h-14 w-[14rem] overflow-hidden">
           <div></div>

@@ -32,8 +32,8 @@ export async function GET(req: Request) {
       break;
   }
   console.log(orderObject);
-  console.log(search)
-  
+  console.log(search);
+
   if (where) {
     const data = await db.recipe.findMany({
       where: search,
@@ -81,9 +81,11 @@ export async function DELETE(req: Request) {
       return LikeId;
     });
     await Promise.all(deleteLikes);
-    if (id.image_key) {
-      await utapi.deleteFiles(id.image_key);
-    }
+    try {
+      if (id.image_key) {
+        await utapi.deleteFiles(id.image_key);
+      }
+    } catch {}
   }
   return NextResponse.json("deleted");
 }

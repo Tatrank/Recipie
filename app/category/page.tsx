@@ -65,14 +65,14 @@ export default function ({
 
               router.push("/category?search=" + text);
             }}
-            className="h-10  cursor-pointer flex w-[4rem]  items-center justify-center bg-secondary-dark rounded-full"
+            className="h-10  cursor-pointer flex w-[4rem]  items-center justify-center  rounded-full"
           >
             <Magnyfing_glass></Magnyfing_glass>
           </div>
         </div>
       </div>
       {searchParams.search && (
-        <div className="m-4 text-center text-4xl">
+        <div  className="m-4 text-center text-4xl">
           Nyní hledáte kategorii: {searchParams.search}
         </div>
       )}

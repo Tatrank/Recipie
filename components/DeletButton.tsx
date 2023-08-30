@@ -21,7 +21,7 @@ export default function DeleteButton({ id }: { id: string }) {
           }
         }}
       >
-        Delete
+        Smazat
       </div>
     </div>
   );
