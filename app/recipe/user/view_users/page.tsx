@@ -32,7 +32,6 @@ export default function Page({
 
   useEffect(() => {
     setLoading(true);
-    console.log(noMoreFetches);
     fetch(
       `http://localhost:3000/api/all_users?page=${page}&orderBy=${searchParams.orderBy}`
     )
@@ -51,7 +50,6 @@ export default function Page({
   }, [page, searchParams]);
 
   useEffect(() => {
-    console.log("změna targetu");
     const target = targetRef.current;
     if (!target) return;
 

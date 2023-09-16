@@ -62,6 +62,9 @@ export async function GET(req: Request) {
   return Response.json(data);
 }
 
+
+
+
 export async function DELETE(req: Request) {
   const { searchParams } = new URL(req.url);
   const query = searchParams.get("id");

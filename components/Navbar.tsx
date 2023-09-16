@@ -66,7 +66,7 @@ backdrop-filter backdrop-blur-lg bg-opacity-10"
         <div className="flex">
           {!session && (
             <div
-              className="hover:cursor-pointer flex justify-center items-center h-10 w-20 bg-primary-dark rounded-2xl bg"
+              className="hover:cursor-pointer flex justify-center items-center md:mb-0 mb-5 h-10 w-20 bg-primary-dark rounded-2xl bg"
               onClick={() => {
                 signIn();
               }}

@@ -12,5 +12,5 @@ export default async function Page() {
   if (!session) {
     redirect("/api/auth/signin?callbackURL=/post_recipe");
   }
-  return <Form></Form>;
+  return <> {session && <Form></Form>}</>;
 }
