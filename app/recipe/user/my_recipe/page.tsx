@@ -7,6 +7,7 @@ import { FullRecepi } from "@/types";
 import DeleteButton from "@/components/DeletButton";
 import { Metadata } from "next";
 import OrderBar from "@/components/OrderBar";
+import { IP_ADDRESS } from "@/lib/files";
 export const metadata: Metadata = {
   title: "Moje recepty",
 };
@@ -21,7 +22,7 @@ export default async function Page({
     redirect("/api/auth/signin?callbackURL=/recipe/user/my_recipe");
   }
   const data = await fetch(
-    `http://localhost:3000/api/userRecipe?userEmail=${session.user?.email}&page=0&my=true&orderBy=${searchParams.orderBy}`,
+    `http://${IP_ADDRESS}/api/userRecipe?userEmail=${session.user?.email}&page=0&my=true&orderBy=${searchParams.orderBy}`,
     { cache: "no-store" }
   );
   const json: FullRecepi[] = await data.json();
@@ -43,7 +44,7 @@ export default async function Page({
                   <div className="flex flex-col items-center justify-between ">
                     <DeleteButton id={item.id}></DeleteButton>
                     <Link
-                      href={`http://localhost:3000/recipe/${item.categories[0].name}/${item.name}/${item.id}`}
+                      href={`/recipe/${item.categories[0].name}/${item.name}/${item.id}`}
                     >
                       <RecepiCard data={item}></RecepiCard>
                     </Link>

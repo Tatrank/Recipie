@@ -6,6 +6,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import LikeButton from "@/components/LikeButton";
 import CryptoJS from "@/lib/encryption";
+import { IP_ADDRESS } from "@/lib/files";
 
 export async function generateMetadata({
   params,
@@ -27,14 +28,16 @@ export default async function page({
   params: { category: String; recipe: String; id: String };
 }) {
   const data = await fetch(
-    `http://localhost:3000/api/recipeBigDetail?id=${params.id}`,
+    `http://${IP_ADDRESS}/api/recipeBigDetail?id=${params.id}`,
     {
       cache: "no-store",
     }
   );
+
   const session = await getServerSession(authOptions);
   const json: FullRecepi = await data.json();
   const mail = CryptoJS.AES.encrypt(json.user.email, "s").toString();
+  console.log(json.groceries_measueres);
   return (
     <div
       className="m-[-2.5rem] mb-[-9rem] sticky top-0 left-0 mt-[-7.5rem] w-[100vw] min-h-[1440px] "

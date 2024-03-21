@@ -1,5 +1,5 @@
 "use client";
-
+import { IP_ADDRESS } from "@/lib/files";
 import { useEffect, useRef, useState } from "react";
 import { UserType } from "@/types";
 import Link from "next/link";
@@ -33,7 +33,7 @@ export default function Page({
   useEffect(() => {
     setLoading(true);
     fetch(
-      `http://localhost:3000/api/all_users?page=${page}&orderBy=${searchParams.orderBy}`
+      `http://${IP_ADDRESS}/api/all_users?page=${page}&orderBy=${searchParams.orderBy}`
     )
       .then((res) => {
         return res.json();

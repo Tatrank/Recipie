@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import TextareaAutosize from "react-textarea-autosize";
 import { motion } from "framer-motion";
+import { IP_ADDRESS } from "@/lib/files";
 export default function AddComment({
   recipe,
   user,
@@ -27,7 +28,7 @@ export default function AddComment({
       return;
     }
     try {
-      const response = await fetch("http://localhost:3000/api/comments", {
+      const response = await fetch(`http://${IP_ADDRESS}/api/comments`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -45,7 +45,7 @@ export async function GET(req: Request) {
       },
       orderBy: orderObject,
     });
-    return Response.json(data);
+    return NextResponse.json(data);
   }
   const data = await db.recipe.findMany({
     where: search,
@@ -59,11 +59,8 @@ export async function GET(req: Request) {
     skip: 12 * query_params,
     orderBy: orderObject,
   });
-  return Response.json(data);
+  return NextResponse.json(data);
 }
-
-
-
 
 export async function DELETE(req: Request) {
   const { searchParams } = new URL(req.url);

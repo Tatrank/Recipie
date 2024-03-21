@@ -4,7 +4,7 @@ import { Favourite_add, Favourite_remove } from "./Icons";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { AnimatePresence } from "framer-motion";
-
+import { IP_ADDRESS } from "@/lib/files";
 export default function LikeButton({
   UserID,
   RecipeID,
@@ -18,7 +18,7 @@ export default function LikeButton({
   const [addedLikes, setAddedLike] = useState(false);
   useEffect(() => {
     fetch(
-      `http://localhost:3000/api/useLike?userID=${UserID}&recipeID=${RecipeID}`
+      `http://${IP_ADDRESS}/api/useLike?userID=${UserID}&recipeID=${RecipeID}`
     )
       .then((res) => {
         return res.json();
@@ -35,7 +35,7 @@ export default function LikeButton({
      w-[100px] h-[100px] z-50 "
       onClick={async () => {
         await fetch(
-          `http://localhost:3000/api/addLike?userID=${UserID}&recipeID=${RecipeID}`
+          `http://${IP_ADDRESS}/api/addLike?userID=${UserID}&recipeID=${RecipeID}`
         );
         setAddedLike(!addedLikes);
         router.refresh();

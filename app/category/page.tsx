@@ -5,7 +5,8 @@ import { useRouter } from "next/navigation";
 import { redirect } from "next/navigation";
 import { link } from "fs";
 import Link from "next/link";
-export default function ({
+import { IP_ADDRESS } from "@/lib/files";
+export default function Page({
   searchParams,
 }: {
   searchParams: { search: string | undefined };
@@ -16,7 +17,7 @@ export default function ({
   const router = useRouter();
   useEffect(() => {
     fetch(
-      `http://localhost:3000/api/getStaticParams/getCategories?search=${
+      `http://${IP_ADDRESS}/api/getStaticParams/getCategories?search=${
         searchParams.search ? searchParams.search : ""
       }`
     )
@@ -30,7 +31,7 @@ export default function ({
   }, []);
   useEffect(() => {
     fetch(
-      `http://localhost:3000/api/getStaticParams/getCategories?search=${
+      `http://${IP_ADDRESS}/api/getStaticParams/getCategories?search=${
         searchParams.search ? searchParams.search : ""
       }`
     )
@@ -72,7 +73,7 @@ export default function ({
         </div>
       </div>
       {searchParams.search && (
-        <div  className="m-4 text-center text-4xl">
+        <div className="m-4 text-center text-4xl">
           Nyní hledáte kategorii: {searchParams.search}
         </div>
       )}
@@ -80,7 +81,7 @@ export default function ({
         if (item.name[0].toUpperCase() != alphabet) {
           alphabet = item.name[0].toUpperCase();
           return (
-            <div>
+            <div key={item.name}>
               <div className="text-9xl border-2 border-secondary-dark p-6 bg-primary-dark rounded-3xl my-8">
                 {alphabet}
               </div>
@@ -93,7 +94,7 @@ export default function ({
           );
         }
         return (
-          <Link href={"/recipe/" + item.name}>
+          <Link href={"/recipe/" + item.name} key={item.name}>
             <div className="flex text-5xl  border-2 border-secondary-dark rounded-xl bg-primary-dark my-2 px-4 py-5  mx-10 ">
               {item.name}
             </div>

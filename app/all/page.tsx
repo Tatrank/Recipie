@@ -6,6 +6,7 @@ import { Metadata } from "next";
 import { useEffect, useRef, useState } from "react";
 import { LoadingAnimated } from "@/components/LoadingAnimated";
 import OrderBar from "@/components/OrderBar";
+import { IP_ADDRESS } from "@/lib/files";
 export const metadata: Metadata = {
   title: "Vše",
   description: "Stránka, která zobrazuje vše",
@@ -42,13 +43,19 @@ export default function Page({
     setPage(0);
     setFirstFetch(true);
   }, [searchParams.searchParams, searchParams.orderBy]);
-
+  console.log(
+    `http://${IP_ADDRESS}/api/getRecepi?page=${page}${
+      searchParams.searchParams != undefined
+        ? `&queryParams=${searchParams.searchParams}`
+        : ""
+    }&orderBy=${searchParams.orderBy}`
+  );
   useEffect(() => {
     console.log("hey");
     console.log(page);
     setLoading(true);
     fetch(
-      `http://localhost:3000/api/getRecepi?page=${page}${
+      `http://${IP_ADDRESS}/api/getRecepi?page=${page}${
         searchParams.searchParams != undefined
           ? `&queryParams=${searchParams.searchParams}`
           : ""
@@ -121,7 +128,7 @@ export default function Page({
             {json.map((item: FullRecepi, index) => (
               <div key={index} className="w-fit m-20 h-fit">
                 <Link
-                  href={`http://localhost:3000/recipe/${item.categories[0].name}/${item.name}/${item.id}`}
+                  href={`http://${IP_ADDRESS}/recipe/${item.categories[0].name}/${item.name}/${item.id}`}
                 >
                   <RecepiCard data={item}></RecepiCard>
                 </Link>

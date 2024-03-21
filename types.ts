@@ -1,5 +1,7 @@
 import { User } from "next-auth";
 
+let IP_ADDRESS: string = "213.29.217.252";
+
 export type FullRecepi = {
   image_url: string;
   image_key: string;

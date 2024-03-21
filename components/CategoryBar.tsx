@@ -1,4 +1,5 @@
 "use client";
+import { IP_ADDRESS } from "@/lib/files";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
@@ -14,9 +15,7 @@ export default function CategoryBar() {
     console.log("hey");
     console.log(page);
     setLoading(true);
-    fetch(
-      `http://localhost:3000/api/getStaticParams/getCategories?page=${page}`
-    )
+    fetch(`http://${IP_ADDRESS}/api/getStaticParams/getCategories?page=${page}`)
       .then((res) => {
         return res.json();
       })

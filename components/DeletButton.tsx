@@ -1,5 +1,6 @@
 "use client";
 
+import { IP_ADDRESS } from "@/lib/files";
 import { useRouter } from "next/navigation";
 
 export default function DeleteButton({ id }: { id: string }) {
@@ -10,7 +11,7 @@ export default function DeleteButton({ id }: { id: string }) {
         className="text-5xl flex justify-center items-center h-full w-full rounded-lg bg-accent-light hover:cursor-pointer"
         onClick={async () => {
           const deletes = await fetch(
-            `http://localhost:3000/api/userRecipe?id=${id}`,
+            `http://${IP_ADDRESS}/api/userRecipe?id=${id}`,
             {
               method: "DELETE",
             }

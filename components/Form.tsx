@@ -9,6 +9,7 @@ import { UploadButton } from "@/lib/uploadthing";
 import "@uploadthing/react/styles.css";
 import { motion } from "framer-motion";
 import Alert from "./Alert";
+import { IP_ADDRESS } from "@/lib/files";
 interface FormData {
   name: string;
   difficulty: string;
@@ -26,7 +27,7 @@ export default function Form(): JSX.Element {
   const router = useRouter();
   const [useableUpload, setUseableUpload] = useState(true);
   const [alert, setAlert] = useState(false);
-  const [post, setPost] = useState(false)
+  const [post, setPost] = useState(false);
   const [alertText, setAlertText] = useState<string>("");
   const [formData, setFormData] = useState<FormData>({
     name: "",
@@ -50,7 +51,7 @@ export default function Form(): JSX.Element {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
- setPost(true)
+    setPost(true);
     // Check if any required input fields are empty
     if (
       formData.name === "" ||
@@ -62,57 +63,57 @@ export default function Form(): JSX.Element {
       formData.groceries_measueres[0][0] === "" ||
       formData.groceries_measueres[0][1] === ""
     ) {
-       setPost(false);
+      setPost(false);
       setAlert(true);
       setAlertText("Vyplňte všechna pole");
       return;
     }
     if (formData.name.length >= 25) {
-       setPost(false);
+      setPost(false);
       setAlert(true);
       setAlertText("Zkraťte jméno receptu");
       return;
     }
     if (formData.difficulty.length >= 25) {
       setAlert(true);
-       setPost(false);
+      setPost(false);
       setAlertText("Zkraťte obtížnost receptu");
       return;
     }
     if (formData.description.length >= 200) {
-       setPost(false);
+      setPost(false);
       setAlert(true);
       setAlertText("Zkraťte obsah receptu");
       return;
     }
     if (formData.time_difficulty.length >= 20) {
-       setPost(false);
+      setPost(false);
       setAlert(true);
       setAlertText("Zkraťte délku času receptu");
       return;
     }
 
     if (formData.stepByStep.length >= 1000) {
-       setPost(false);
+      setPost(false);
       setAlert(true);
       setAlertText("Zkraťte délku receptu");
       return;
     }
 
     if (formData.category.length >= 6) {
-       setPost(false);
+      setPost(false);
       setAlert(true);
       setAlertText("Hodně kategorií");
       return;
     }
     if (formData.groceries_measueres.length >= 30) {
-       setPost(false);
+      setPost(false);
       setAlert(true);
       setAlertText("Hodně surovin");
       return;
     }
     try {
-      const response = await fetch("http://localhost:3000/api/create", {
+      const response = await fetch(`http://${IP_ADDRESS}/api/create`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -124,7 +125,7 @@ export default function Form(): JSX.Element {
       if (response.ok) {
         const res = await response.json();
         router.push(
-          `http://localhost:3000/recipe/${res.categories[0].name}/${res.name}/${res.id}`
+          `http://${IP_ADDRESS}/recipe/${res.categories[0].name}/${res.name}/${res.id}`
         );
       } else {
         setAlert(true);
@@ -136,7 +137,7 @@ export default function Form(): JSX.Element {
       setAlertText("něco se nepovedlo");
       console.error("An error occurred:", error);
     }
-     setPost(false);
+    setPost(false);
   }
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -253,7 +254,7 @@ export default function Form(): JSX.Element {
                 whileHover={{ scale: 1.3 }}
                 onClick={async () => {
                   await fetch(
-                    `http://localhost:3000/api/deleteImage?imageId=${formData.image_key}`,
+                    `http://${IP_ADDRESS}/api/deleteImage?imageId=${formData.image_key}`,
                     { method: "DELETE" }
                   );
                   setUseableUpload(true);
@@ -405,7 +406,7 @@ bg-primary-dark rounded p-2 mt-2 cursor-pointer"
           </div>
           <div className="flex justify-center w-full">
             <motion.button
-            disabled={post}
+              disabled={post}
               whileHover={{ scale: 1.08 }}
               onClick={handleSubmit}
               className="mt-4 m-auto py-8  text-4xl px-16  bg-primary-dark rounded"

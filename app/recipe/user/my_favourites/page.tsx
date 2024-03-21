@@ -8,6 +8,7 @@ import { Metadata } from "next";
 import { useEffect, useRef, useState } from "react";
 import { LoadingAnimated } from "@/components/LoadingAnimated";
 import OrderBar from "@/components/OrderBar";
+import { IP_ADDRESS } from "@/lib/files";
 export const metadata: Metadata = {
   title: "Moje oblíbené",
 };
@@ -44,7 +45,7 @@ export default function Page({
       console.log(page);
       setLoading(true);
       fetch(
-        `http://localhost:3000/api/getFavourites?page=${page}&userEmail=${session?.user?.email}&orderBy=${searchParams.orderBy}`
+        `http://${IP_ADDRESS}/api/getFavourites?page=${page}&userEmail=${session?.user?.email}&orderBy=${searchParams.orderBy}`
       )
         .then((res) => {
           return res.json();
@@ -108,7 +109,7 @@ export default function Page({
               {json.map((item: FullRecepi) => (
                 <div key={item.id} className="w-fit m-20 h-fit">
                   <Link
-                    href={`http://localhost:3000/recipe/${item.categories[0].name}/${item.name}/${item.id}`}
+                    href={`http://${IP_ADDRESS}/recipe/${item.categories[0].name}/${item.name}/${item.id}`}
                   >
                     <RecepiCard data={item}></RecepiCard>
                   </Link>

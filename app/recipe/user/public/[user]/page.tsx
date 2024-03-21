@@ -6,6 +6,7 @@ import { FullRecepi } from "@/types";
 import { Metadata } from "next";
 import { LoadingAnimated } from "@/components/LoadingAnimated";
 import OrderBar from "@/components/OrderBar";
+import { IP_ADDRESS } from "@/lib/files";
 export const metadata: Metadata = {
   title: "Uživatel",
 };
@@ -32,7 +33,7 @@ export default function Page({
   useEffect(() => {
     setLoading(true);
     fetch(
-      `http://localhost:3000/api/userRecipe?page=${page}&userEmail=${params.user}&orderBy=${searchParams.orderBy}`
+      `http://${IP_ADDRESS}/userRecipe?page=${page}&userEmail=${params.user}&orderBy=${searchParams.orderBy}`
     )
       .then((res) => {
         return res.json();
@@ -96,7 +97,7 @@ export default function Page({
           {json.map((item: FullRecepi) => (
             <div key={item.id} className="w-fit m-20 h-fit">
               <Link
-                href={`http://localhost:3000/recipe/${item.categories[0].name}/${item.name}/${item.id}`}
+                href={`/recipe/${item.categories[0].name}/${item.name}/${item.id}`}
               >
                 <RecepiCard data={item}></RecepiCard>
               </Link>

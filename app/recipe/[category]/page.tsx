@@ -5,6 +5,7 @@ import { FullRecepi } from "@/types";
 import { useEffect, useRef, useState } from "react";
 import { LoadingAnimated } from "@/components/LoadingAnimated";
 import OrderBar from "@/components/OrderBar";
+import { IP_ADDRESS } from "@/lib/files";
 export async function generateMetadata({
   params,
 }: {
@@ -49,7 +50,7 @@ export default function Page({
     setLoading(true);
 
     fetch(
-      `http://localhost:3000/api/getByCategory?page=${page}&categoryParams=${params.category}&orderBy=${searchParams.orderBy}`
+      `http://${IP_ADDRESS}/api/getByCategory?page=${page}&categoryParams=${params.category}&orderBy=${searchParams.orderBy}`
     )
       .then((res) => {
         return res.json();
@@ -111,7 +112,7 @@ export default function Page({
           {json.map((item: FullRecepi) => (
             <div key={item.id} className="w-fit m-20 h-fit">
               <Link
-                href={`http://localhost:3000/recipe/${item.categories[0].name}/${item.name}/${item.id}`}
+                href={`/recipe/${item.categories[0].name}/${item.name}/${item.id}`}
               >
                 <RecepiCard data={item}></RecepiCard>
               </Link>

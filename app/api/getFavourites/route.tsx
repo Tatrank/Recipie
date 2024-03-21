@@ -41,5 +41,5 @@ export async function GET(req: Request) {
     skip: 12 * query_params,
     orderBy: orderObject,
   });
-  return Response.json(data);
+  return NextResponse.json(data);
 }

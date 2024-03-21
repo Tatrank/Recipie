@@ -95,39 +95,38 @@ backdrop-filter backdrop-blur-lg bg-opacity-10"
                     </div>
                   </motion.div>
                 }
-                children={
-                  <div className=" z-50 ">
-                    <div className="ml-auto  z-50 w-[15rem] h-56    text-text-dark border-t-0 border border-secondary-dark   bg-background-dark backdrop-filter backdrop-blur-sm bg-opacity-60">
-                      <div
-                        onClick={() => {
-                          signOut();
-                        }}
-                        className="hover:cursor-pointer flex justify-center items-center text-xl w-full h-1/4 border-b border-secondary-dark  "
-                      >
-                        Odhlásit
-                      </div>
-                      <Link href="/recipe/user/my_recipe">
-                        <div className="hover:cursor-pointer flex justify-center items-center text-xl w-full h-1/4 border-b border-secondary-dark ">
-                          Moje
-                        </div>
-                      </Link>
-                      <Link href="/post_recipe">
-                        <div className="hover:cursor-pointer flex justify-center items-center text-xl w-full h-1/4 border-b border-secondary-dark  ">
-                          Vytvořit
-                        </div>
-                      </Link>
-                      <Link href="/recipe/user/my_favourites">
-                        <div className="hover:cursor-pointer flex justify-center items-center text-xl w-full h-1/4 border-secondary-dark  ">
-                          Oblíbené
-                        </div>
-                      </Link>
-                    </div>
-                  </div>
-                }
                 classNames={
                   "py-2 left-1 md:bottom-[-15.3rem]  bottom-[-14.6rem]"
                 }
-              />
+              >
+                <div className=" z-50 ">
+                  <div className="ml-auto  z-50 w-[15rem] h-56    text-text-dark border-t-0 border border-secondary-dark   bg-background-dark backdrop-filter backdrop-blur-sm bg-opacity-60">
+                    <div
+                      onClick={() => {
+                        signOut();
+                      }}
+                      className="hover:cursor-pointer flex justify-center items-center text-xl w-full h-1/4 border-b border-secondary-dark  "
+                    >
+                      Odhlásit
+                    </div>
+                    <Link href="/recipe/user/my_recipe">
+                      <div className="hover:cursor-pointer flex justify-center items-center text-xl w-full h-1/4 border-b border-secondary-dark ">
+                        Moje
+                      </div>
+                    </Link>
+                    <Link href="/post_recipe">
+                      <div className="hover:cursor-pointer flex justify-center items-center text-xl w-full h-1/4 border-b border-secondary-dark  ">
+                        Vytvořit
+                      </div>
+                    </Link>
+                    <Link href="/recipe/user/my_favourites">
+                      <div className="hover:cursor-pointer flex justify-center items-center text-xl w-full h-1/4 border-secondary-dark  ">
+                        Oblíbené
+                      </div>
+                    </Link>
+                  </div>
+                </div>
+              </Dropdown>
             </>
           )}
         </div>

@@ -1,4 +1,5 @@
 "use client";
+import { IP_ADDRESS } from "@/lib/files";
 import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
 export default function RemoveComment({ commentId }: { commentId: string }) {
@@ -12,7 +13,7 @@ export default function RemoveComment({ commentId }: { commentId: string }) {
         whileTap={{ scale: 0.8 }}
         onClick={async () => {
           await fetch(
-            `http://localhost:3000/api/comments?commentId=${commentId}`,
+            `http://${IP_ADDRESS}/api/comments?commentId=${commentId}`,
             {
               method: "DELETE",
             }
