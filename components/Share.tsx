@@ -11,9 +11,13 @@ import {
 } from "react-share";
 import { ShareIcon } from "./Icons";
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { use, useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
+import path from "path";
+import { IP_ADDRESS } from "@/lib/files";
 export default function Share() {
   const [show, setShow] = useState(false);
+  const pathname = usePathname();
   return (
     <div className=" z-50 sticky top-0 right-5  ">
       <motion.div
@@ -31,26 +35,26 @@ export default function Share() {
         >
           <FacebookShareButton
             className="m-[8px] rotate-[-90deg] md:rotate-0"
-            url={"window.location.href"}
+            url={`${IP_ADDRESS}//${pathname}`}
             quote="fasf"
           >
             <FacebookIcon size={48}></FacebookIcon>
           </FacebookShareButton>
           <TumblrShareButton
             className="m-[8px] rotate-[-90deg] md:rotate-0"
-            url={document.URL}
+            url={`${IP_ADDRESS}//${pathname}`}
           >
             <TumblrIcon size={48}></TumblrIcon>
           </TumblrShareButton>
           <WhatsappShareButton
             className="m-[8px] rotate-[-90deg] md:rotate-0"
-            url={document.URL}
+            url={`${IP_ADDRESS}//${pathname}`}
           >
             <WhatsappIcon size={48}></WhatsappIcon>
           </WhatsappShareButton>
           <TwitterShareButton
             className="m-[8px] rotate-[-90deg] md:rotate-0"
-            url={document.URL}
+            url={`${IP_ADDRESS}//${pathname}`}
           >
             <TwitterIcon size={48}></TwitterIcon>
           </TwitterShareButton>
@@ -61,7 +65,6 @@ export default function Share() {
 top-[90vh] right-5  h-[80px] bg-secondary-dark rounded-xl cursor-pointer"
         onClick={() => {
           setShow(!show);
-          console.log(document.URL);
         }}
       >
         <ShareIcon></ShareIcon>
