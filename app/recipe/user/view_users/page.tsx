@@ -6,9 +6,9 @@ import Link from "next/link";
 import UserCard from "@/components/UserCard";
 import { LoadingAnimated } from "@/components/LoadingAnimated";
 import { Metadata } from "next";
-export const metadata: Metadata = {
-  title: "Profily",
-};
+//export const metadata: Metadata = {
+//  title: "Profily",
+//};
 
 export default function Page({
   searchParams,

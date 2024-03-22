@@ -7,10 +7,10 @@ import { useEffect, useRef, useState } from "react";
 import { LoadingAnimated } from "@/components/LoadingAnimated";
 import OrderBar from "@/components/OrderBar";
 import { IP_ADDRESS } from "@/lib/files";
-export const metadata: Metadata = {
-  title: "Vše",
-  description: "Stránka, která zobrazuje vše",
-};
+//export const metadata: Metadata = {
+//  title: "Vše",
+//  description: "Stránka, která zobrazuje vše",
+//};
 
 export default function Page({
   searchParams,

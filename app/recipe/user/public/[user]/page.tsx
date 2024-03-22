@@ -7,9 +7,9 @@ import { Metadata } from "next";
 import { LoadingAnimated } from "@/components/LoadingAnimated";
 import OrderBar from "@/components/OrderBar";
 import { IP_ADDRESS } from "@/lib/files";
-export const metadata: Metadata = {
-  title: "Uživatel",
-};
+//export const metadata: Metadata = {
+//  title: "Uživatel",
+//};
 export default function Page({
   params,
   searchParams,
