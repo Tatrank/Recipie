@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 };
 export default async function Page() {
   const session = await getServerSession(authOptions);
-
+  console.log(session);
   if (!session) {
     redirect("/api/auth/signin?callbackURL=/post_recipe");
   }

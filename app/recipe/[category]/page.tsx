@@ -6,15 +6,15 @@ import { useEffect, useRef, useState } from "react";
 import { LoadingAnimated } from "@/components/LoadingAnimated";
 import OrderBar from "@/components/OrderBar";
 import { IP_ADDRESS } from "@/lib/files";
-export async function generateMetadata({
-  params,
-}: {
-  params: { category: String };
-}) {
-  return {
-    title: params.category,
-  };
-}
+//export async function generateMetadata({
+//  params,
+//}: {
+//  params: { category: String };
+//}) {
+//  return {
+//    title: params.category,
+//  };
+//}
 
 /* export async function generateStaticParams() {
   const category: { name: string; id: string }[] = await fetch(
