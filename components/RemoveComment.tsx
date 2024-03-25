@@ -2,6 +2,7 @@
 import { IP_ADDRESS } from "@/lib/files";
 import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
+import { DeleteIcon } from "./Icons";
 export default function RemoveComment({ commentId }: { commentId: string }) {
   const router = useRouter();
   return (
@@ -21,7 +22,7 @@ export default function RemoveComment({ commentId }: { commentId: string }) {
           router.refresh();
         }}
       >
-        Smazat
+        <DeleteIcon />
       </motion.div>
     </>
   );

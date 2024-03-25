@@ -29,11 +29,11 @@ export default function Page({
     setJSON([]);
     setPage(0);
     setFirstFetch(true);
-  }, [, searchParams.orderBy]);
+  }, [searchParams.orderBy]);
   useEffect(() => {
     setLoading(true);
     fetch(
-      `http://${IP_ADDRESS}/userRecipe?page=${page}&userEmail=${params.user}&orderBy=${searchParams.orderBy}`
+      `http://${IP_ADDRESS}/api/userRecipe?page=${page}&userEmail=${params.user}&orderBy=${searchParams.orderBy}`
     )
       .then((res) => {
         return res.json();

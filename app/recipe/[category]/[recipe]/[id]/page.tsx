@@ -36,7 +36,6 @@ export default async function page({
 
   const session = await getServerSession(authOptions);
   const json: FullRecepi = await data.json();
-  const mail = CryptoJS.AES.encrypt(json.user.email, "s").toString();
   console.log(json.groceries_measueres);
   return (
     <div
@@ -64,7 +63,7 @@ export default async function page({
                 Přidal
               </div>
               <div className="flex justify-center items-center px-5  text-xl md:text-3xl">
-                <Link href={`/recipe/user/public/${mail}`}>
+                <Link href={`/recipe/user/public/${json.user.id}`}>
                   {" "}
                   {json.user.name}
                 </Link>
@@ -152,7 +151,7 @@ export default async function page({
               >
                 <div className="flex mb-3 w-full justify-between items-center">
                   <Link href={`/recipe/user/public/${item.User.id}`}>
-                    <div className=" flex justify-between justify-items-center items-center h-14 w-[14rem] overflow-hidden">
+                    <div className=" flex justify-between justify-items-center items-center h-14 md:w-[14rem] overflow-hidden">
                       <div className=" md:static absolute "></div>
                       <div className=" hidden  border md:inline absolute z-10 rounded-full border-secondary-dark">
                         <img
@@ -167,7 +166,7 @@ export default async function page({
                     </div>
                   </Link>
                   {session?.user?.email == item.User.email ? (
-                    <div className="md:p-4 p-2 bg-background-dark rounded-3xl text-lg md:text-3xl hover:cursor-pointer">
+                    <div className="md:p-4 p-2 rounded-3xl text-lg md:text-3xl hover:cursor-pointer">
                       <RemoveComment commentId={item.id}></RemoveComment>
                     </div>
                   ) : (

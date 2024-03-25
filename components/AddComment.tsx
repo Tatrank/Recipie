@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import TextareaAutosize from "react-textarea-autosize";
 import { motion } from "framer-motion";
 import { IP_ADDRESS } from "@/lib/files";
+import { SendIcon } from "@/components/Icons";
 export default function AddComment({
   recipe,
   user,
@@ -68,15 +69,16 @@ export default function AddComment({
             {userName}
           </div>
         </div>
+
         <motion.div
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.8 }}
-          className="md:p-4 p-2 bg-background-dark rounded-3xl text-xl md:text-3xl hover:cursor-pointer"
+          className="md:p-4 p-2 rounded-3xl text-xl md:text-3xl hover:cursor-pointer"
           onClick={handleSubmit}
         >
-          Send
+          <SendIcon />
         </motion.div>
       </div>
       <TextareaAutosize

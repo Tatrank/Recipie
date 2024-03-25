@@ -9,15 +9,15 @@ module.exports = {
   theme: {
     colors: {
       primary: {
-        dark: "#176B87",
+        dark: "#0074B7",
         light: "#176B87",
       },
       secondary: {
-        dark: "#64CCC5",
+        dark: "#60A3D9",
         light: "#fbfefe",
       },
-      accent: { dark: "#edafca", light: "#d13277" },
-      background: { dark: "#001C30", light: "#DAFFFB" },
+      accent: { dark: "#60A3D9", light: "#d13277" },
+      background: { dark: "#003B73", light: "#DAFFFB" },
       text: { dark: "#DAFFFB", light: "#001C30" },
     },
     extend: {},

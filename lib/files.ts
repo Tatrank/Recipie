@@ -1,2 +1,1 @@
-export let IP_ADDRESS: string =
-  "recipie-6913642pu-tatranks-projects.vercel.app";
+export let IP_ADDRESS: string = "213.29.217.252:3000";
