@@ -35,7 +35,7 @@ export default function RecepiCard({ data }: { data: FullRecepi }) {
             setShowData(false);
           }, 200);
         }}
-        className="md:w-[400px] w-[375px] rounded-3xl  h-[600px] border-4 border-secondary-dark overflow-hidden"
+        className="md:w-[400px] md:scale-100 scale-50 w-[375px] rounded-3xl  h-[600px] border-4 border-secondary-dark overflow-hidden"
       >
         <div
           style={{

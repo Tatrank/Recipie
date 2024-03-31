@@ -220,7 +220,7 @@ export default function Form(): JSX.Element {
               onChange={handleInputChange}
               placeholder="Zadejejte jméno pokrmu"
               className="w-full
- bg-background-dark rounded border-secondary-dark bg-opacity-0 p-2"
+              rounded-lg !border-t-primary-dark bg-secondary-dark placeholder-white text-black focus:!border-t-gray-900"
               required
             />
           </motion.div>
@@ -281,7 +281,7 @@ bg-primary-dark rounded p-2 mt-2 cursor-pointer"
                 setFormData((prevData) => ({ ...prevData, [name]: value }));
               }}
               placeholder="Zadejte stručný popis jídla"
-              className="w-full min-h-[10rem] bg-background-dark rounded border-secondary-dark bg-opacity-0 p-2"
+              className="w-full min-h-[10rem] rounded-lg !border-t-primary-dark bg-secondary-dark placeholder-white text-black focus:!border-t-gray-900"
               required
             />
           </motion.div>
@@ -298,7 +298,7 @@ bg-primary-dark rounded p-2 mt-2 cursor-pointer"
               onChange={handleInputChange}
               placeholder="Zadejte obtížnost jídla"
               className="w-full
- bg-background-dark rounded border-secondary-dark bg-opacity-0 p-2"
+              rounded-lg !border-t-primary-dark bg-secondary-dark placeholder-white text-black focus:!border-t-gray-900"
               required
             />
           </motion.div>
@@ -315,7 +315,7 @@ bg-primary-dark rounded p-2 mt-2 cursor-pointer"
               onChange={handleInputChange}
               placeholder="Zadejte časovou obtížnost jídla"
               className="w-full
- bg-background-dark rounded border-secondary-dark bg-opacity-0 p-2"
+              rounded-lg !border-t-primary-dark bg-secondary-dark placeholder-white text-black focus:!border-t-gray-900"
               required
             />
           </motion.div>
@@ -326,7 +326,7 @@ bg-primary-dark rounded p-2 mt-2 cursor-pointer"
           >
             <label className="block font-bold">Krok za krokem</label>
             <TextareaAutosize
-              className="w-full min-h-[15rem] bg-background-dark rounded border-secondary-dark bg-opacity-0 p-2"
+              className="w-full min-h-[15rem] rounded-lg !border-t-primary-dark bg-secondary-dark placeholder-white text-black focus:!border-t-gray-900"
               name="stepByStep"
               value={formData.stepByStep}
               onChange={(e) => {
@@ -358,7 +358,7 @@ bg-primary-dark rounded p-2 mt-2 cursor-pointer"
                     addCategory(index);
                   }}
                   className="w-full
- bg-background-dark rounded border-secondary-dark bg-opacity-0 p-2"
+                  rounded-lg !border-t-primary-dark bg-secondary-dark placeholder-white text-black focus:!border-t-gray-900"
                   required
                 />
               </motion.div>
@@ -385,7 +385,7 @@ bg-primary-dark rounded p-2 mt-2 cursor-pointer"
                     addGroceriesAndMesuerements(index);
                   }}
                   className="w-full
- bg-background-dark rounded border-secondary-dark bg-opacity-0 p-2"
+                  rounded-lg !border-t-primary-dark bg-secondary-dark placeholder-white text-black focus:!border-t-gray-900"
                   required
                 />
                 <label className="block font-bold">
@@ -398,7 +398,7 @@ bg-primary-dark rounded p-2 mt-2 cursor-pointer"
                   onChange={handleInputChange}
                   placeholder="Množství"
                   className="w-full
- bg-background-dark rounded border-secondary-dark bg-opacity-0 p-2"
+                  rounded-lg !border-t-primary-dark bg-secondary-dark placeholder-white text-black focus:!border-t-gray-900"
                   required
                 />
               </motion.div>

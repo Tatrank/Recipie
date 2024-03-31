@@ -25,7 +25,6 @@ model Account {
   scope             String?
   id_token          String? @db.Text
   session_state     String?
-
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
@@ -44,13 +43,14 @@ model User {
   name          String?
   email         String?   @unique
   emailVerified DateTime?
-  image         String?
+  image         String?  @default("https://t3.ftcdn.net/jpg/04/63/51/28/360_F_463512856_GEk2IrQkYatpRVR9YDhiZgRY2z00Zet3.jpg")
   accounts      Account[]
   sessions      Session[]
   role          Role      @default(user)
   recepies      recipe[]
   likes         like[]
   comments      comment[]
+    password          String? @db.Text
 }
 
 model VerificationToken {

@@ -19,7 +19,7 @@ export default function Share() {
   const [show, setShow] = useState(false);
   const pathname = usePathname();
   return (
-    <div className=" z-50 sticky top-0 right-5  ">
+    <div className=" md:scale-100 scale-[80%] z-50 sticky md:top-0 top-36 right-12 md:right-5  ">
       <motion.div
         animate={{
           borderColor: "rgb(255, 0, 0)",
@@ -27,7 +27,7 @@ export default function Share() {
           padding: show ? "10px" : 0,
         }}
         className="z-50 overflow-hidden
-         absolute flex items-center justify-items-center align-middle md:rotate-0 rotate-90 origin-right   justify-between   w-fit  md:top-[90vh] top-[87vh] right-[60px]  md:right-[88px]   h-[80px] bg-secondary-dark rounded-l-xl  "
+         absolute flex items-center justify-items-center align-middle md:rotate-0 rotate-90 origin-right   justify-between   w-fit  md:top-[90vh] top-[87vh] right-[10px]  md:right-[88px]   h-[80px] bg-secondary-dark rounded-l-xl  "
       >
         <motion.div
           animate={{ visibility: show ? "visible" : "hidden" }}
@@ -62,7 +62,7 @@ export default function Share() {
       </motion.div>
       <div
         className="flex w-[80px] absolute  items-center justify-center
-top-[90vh] right-5  h-[80px] bg-secondary-dark rounded-xl cursor-pointer"
+top-[90vh] md:right-10 right-[-1.9rem]   h-[80px] bg-secondary-dark rounded-xl cursor-pointer"
         onClick={() => {
           setShow(!show);
         }}

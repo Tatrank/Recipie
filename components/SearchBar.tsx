@@ -17,7 +17,7 @@ export function SearchBar() {
       animate={{
         width: showSearch ? "10rem" : "25rem",
       }}
-      className="w-[25rem] flex justify-between items-center  rounded-full h-10 bg-primary-light dark:bg-primary-dark"
+      className="w-[25rem] scale-[80%] md:scale-100  flex justify-between items-center  rounded-full h-10 bg-primary-light dark:bg-primary-dark"
     >
       <motion.input
         placeholder="Máte něco konkrétního na mysli?"

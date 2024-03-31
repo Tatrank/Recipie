@@ -95,6 +95,7 @@ export default function Page({
 
   return (
     <>
+      <title>Moje oblíbené</title>
       {session && (
         <div
           className="flex flex-col items-center justify-center

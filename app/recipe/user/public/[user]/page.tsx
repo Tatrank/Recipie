@@ -81,42 +81,45 @@ export default function Page({
   }, [targetRef, noMoreFetches, firstFetch, loadin]);
 
   return (
-    <div
-      className="flex flex-col items-center justify-center
+    <>
+      <title>Uživatelé</title>
+      <div
+        className="flex flex-col items-center justify-center
     "
-    >
-      <div className="w-full flex justify-center text-7xl">
-        {json[0]?.user.name}
-      </div>
-      <OrderBar
-        selected={searchParams.orderBy}
-        url={`/recipe/user/public/${params.user}`}
-      ></OrderBar>
-      {json.length ? (
-        <div className="flex flex-wrap justify-center h-fit w-9/10">
-          {json.map((item: FullRecepi) => (
-            <div key={item.id} className="w-fit m-20 h-fit">
-              <Link
-                href={`/recipe/${item.categories[0].name}/${item.name}/${item.id}`}
-              >
-                <RecepiCard data={item}></RecepiCard>
-              </Link>
-            </div>
-          ))}
+      >
+        <div className="w-full flex justify-center text-7xl">
+          {json[0]?.user.name}
         </div>
-      ) : !loadin ? (
-        <div className="text-4xl my-10">Tady nic není</div>
-      ) : (
-        <div
-          className={`flex m-[-30.5rem] md:m-[-10.5rem] justify-center items-center  w-[100vw] min-h-[1440px] h-[100vh] bg-black bg-opacity-40 sticky top-0  left-0 `}
-        >
-          <div className="flex justify-center  w-full h-[100vh] ">
-            <LoadingAnimated></LoadingAnimated>
+        <OrderBar
+          selected={searchParams.orderBy}
+          url={`/recipe/user/public/${params.user}`}
+        ></OrderBar>
+        {json.length ? (
+          <div className="flex flex-wrap justify-center h-fit w-9/10">
+            {json.map((item: FullRecepi) => (
+              <div key={item.id} className="w-fit m-20 h-fit">
+                <Link
+                  href={`/recipe/${item.categories[0].name}/${item.name}/${item.id}`}
+                >
+                  <RecepiCard data={item}></RecepiCard>
+                </Link>
+              </div>
+            ))}
           </div>
-        </div>
-      )}
-      {loadin && <LoadingAnimated></LoadingAnimated>}
-      <div ref={targetRef}></div>
-    </div>
+        ) : !loadin ? (
+          <div className="text-4xl my-10">Tady nic není</div>
+        ) : (
+          <div
+            className={`flex m-[-30.5rem] md:m-[-10.5rem] justify-center items-center  w-[100vw] min-h-[1440px] h-[100vh] bg-black bg-opacity-40 sticky top-0  left-0 `}
+          >
+            <div className="flex justify-center  w-full h-[100vh] ">
+              <LoadingAnimated></LoadingAnimated>
+            </div>
+          </div>
+        )}
+        {loadin && <LoadingAnimated></LoadingAnimated>}
+        <div ref={targetRef}></div>
+      </div>
+    </>
   );
 }

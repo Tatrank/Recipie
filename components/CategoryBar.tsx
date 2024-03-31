@@ -59,7 +59,7 @@ export default function CategoryBar() {
   }, [targetRef, noMoreFetches, firstFetch, loadin]);
 
   return (
-    <div className="relative top-48 md:top-20 ">
+    <div className="relative top-32 md:top-20 ">
       <Link href={"/recipe/user/view_users"}>
         <motion.div
           whileTap={{ scale: 0.8 }}

@@ -2,8 +2,6 @@
 import { useState, useEffect } from "react";
 import { Magnyfing_glass } from "@/components/Icons";
 import { useRouter } from "next/navigation";
-import { redirect } from "next/navigation";
-import { link } from "fs";
 import Link from "next/link";
 import { IP_ADDRESS } from "@/lib/files";
 export default function Page({
@@ -15,20 +13,7 @@ export default function Page({
   let alphabet = "A";
   const [text, setText] = useState<string | undefined>();
   const router = useRouter();
-  useEffect(() => {
-    fetch(
-      `http://${IP_ADDRESS}/api/getStaticParams/getCategories?search=${
-        searchParams.search ? searchParams.search : ""
-      }`
-    )
-      .then((res) => {
-        return res.json();
-      })
-      .then((res) => {
-        console.log(res);
-        setData(res);
-      });
-  }, []);
+
   useEffect(() => {
     fetch(
       `http://${IP_ADDRESS}/api/getStaticParams/getCategories?search=${

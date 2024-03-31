@@ -53,7 +53,7 @@ export default async function Page({
               ))}
             </div>
           ) : (
-            <div className="text-3xl flex justify-center items-center">
+            <div className="text-3xl m-7 flex justify-center items-center">
               Tady zatím nic není.
               <Link href={"/post_recipe"}>
                 <div className="rounded-md mx-4 flex items-center w-fit px-4 h-12 bg-primary-dark">

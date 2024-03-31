@@ -100,7 +100,7 @@ export default function Page({
     "
     >
       <div className="flex text-center justify-center w-[100vw] items-center h-20 text-4xl">
-        Nyní prohlížíte {params.category} kategorii
+        Nyní prohlížíte {decodeURI(params.category)} kategorii
       </div>
       <OrderBar
         selected={searchParams.orderBy}
