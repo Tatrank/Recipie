@@ -18,6 +18,7 @@ export function SimpleRegistrationForm() {
   const router = useRouter();
   const [formData, setFormData] = useState({
     name: "",
+    email: "",
     password: "",
   });
   const handleInputChange = (e: any) => {
@@ -29,7 +30,11 @@ export function SimpleRegistrationForm() {
   };
   async function postData() {
     try {
-      if (formData.name === "" || formData.password === "") {
+      if (
+        formData.name === "" ||
+        formData.email === "" ||
+        formData.password === ""
+      ) {
         return;
       }
       console.log(formData);
@@ -87,7 +92,18 @@ export function SimpleRegistrationForm() {
             }}
             onChange={handleInputChange}
           />
-
+          <Typography variant="h6" color="blue-gray" className="-mb-3">
+            Your Email
+          </Typography>
+          <Input
+            name="email"
+            placeholder="name@mail.com"
+            className="rounded-lg h-8 !border-t-blue-gray-200 placeholder-white text-black bg-secondary-dark focus:!border-t-gray-900"
+            labelProps={{
+              className: "before:content-none after:content-none",
+            }}
+            onChange={handleInputChange}
+          />
           <Typography variant="h6" color="blue-gray" className="-mb-3">
             Password
           </Typography>

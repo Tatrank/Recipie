@@ -8,6 +8,7 @@ export async function POST(req: Request) {
     where: {
       name: data.name,
       password: data.password,
+      email: data.email,
     },
   });
   if (exits) {
@@ -17,6 +18,7 @@ export async function POST(req: Request) {
     data: {
       name: data.name,
       password: data.password,
+      email: data.email,
     },
   });
   return NextResponse.json("");
