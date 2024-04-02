@@ -108,7 +108,7 @@ export default function Page({
       ></OrderBar>
 
       {json.length ? (
-        <div className="flex flex-wrap justify-center h-fit w-9/10">
+        <div className="flex flex-wrap md:scale-100 scale-50 justify-center h-fit w-9/10">
           {json.map((item: FullRecepi) => (
             <div key={item.id} className="w-fit m-20 h-fit">
               <Link

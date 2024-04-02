@@ -7,6 +7,7 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import LikeButton from "@/components/LikeButton";
 import CryptoJS from "@/lib/encryption";
 import { IP_ADDRESS } from "@/lib/files";
+import Share from "@/components/Share";
 
 export async function generateMetadata({
   params,
@@ -45,9 +46,10 @@ export default async function page({
         backgroundSize: "cover",
       }}
     >
+      <Share></Share>
       <div className=" h-full flex justify-center items-center flex-col w-full px-3 py-[20rem]  bg-black backdrop-filter backdrop-blur-xl bg-opacity-60  ">
         <div className="md:w-[1300px] w-full flex flex-col items-center   text-text-dark bg-background-dark rounded-3xl p-7 bg-opacity-40 border-2  border-secondary-dark">
-          <div className="flex justify-center items-center text-6xl md:text-8xl">
+          <div className="flex md:scale-100 scale-75 justify-center items-center text-6xl md:text-8xl">
             {json.name}
             {session && (
               <LikeButton
@@ -105,18 +107,18 @@ export default async function page({
             </div>
           </div>
           <div className="md:w-2/3 w-full h-fit m-10 p-8 flex items-center flex-col  bg-primary-dark rounded-3xl border-2 border-secondary-dark">
-            <div className="px-4 flex justify-center items-center w-fit min-w-[8rem] h-24 mb-10 rounded-full bg-background-dark text-3xl">
+            <div className="px-4 flex justify-center items-center w-fit min-w-[8rem] md:scale-100 scale-75 h-24 mb-10 rounded-full bg-background-dark text-3xl">
               Ingredience
             </div>
-            <div className="text-xl w-full p-8 h-2/3 flex justify-center ">
-              <div className="w-2/5 flex justify-end items-center h-full text-xl pr-3  border-r-2">
+            <div className=" text-xl w-full p-8 h-2/3 flex justify-center ">
+              <div className="w-2/5 flex justify-end items-center h-full  md:text-xl pr-3  border-r-2">
                 <div>
                   {json.groceries_measueres.map((item) => {
                     return <div key={item.id}> {item.grocery.name}</div>;
                   })}
                 </div>
               </div>
-              <div className="w-2/5 h-full text-xl flex items-center  pl-3">
+              <div className="w-2/5 h-full  flex items-center  md:text-xl  pl-3">
                 <div>
                   {json.groceries_measueres.map((item) => {
                     return <div key={item.id}> {item.measure.value}</div>;
@@ -126,10 +128,10 @@ export default async function page({
             </div>
           </div>
           <div className="w-full h-fit p-8 m-10 flex items-center flex-col  bg-primary-dark rounded-3xl border-2 border-secondary-dark">
-            <div className="px-4 flex justify-center items-center w-fit min-w-[8rem] h-16 mb-10 rounded-full bg-background-dark text-3xl">
+            <div className="px-4 md:scale-100 scale-75 flex justify-center items-center w-fit min-w-[8rem] h-16 mb-10 rounded-full bg-background-dark text-3xl">
               Příprava
             </div>
-            <div className="text-xl w-full flex justify-start">
+            <div className="md:text-xl  w-full flex justify-start">
               {json.disclaimer}
             </div>
           </div>
@@ -174,7 +176,7 @@ export default async function page({
                   )}
                 </div>
                 <div
-                  className="w-full min-h-[6 rem] rounded-lg text-xl h-fit p-7 bg-background-dark "
+                  className="w-full min-h-[6 rem] rounded-lg md:text-xl h-fit p-7 bg-background-dark "
                   id="comment"
                 >
                   {item.text}

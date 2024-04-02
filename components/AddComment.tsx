@@ -88,7 +88,7 @@ export default function AddComment({
         }}
         placeholder="Vyjádřete se"
         name="commentText"
-        className="w-full min-h-[6 rem] rounded-lg text-2xl h-fit p-7 bg-background-dark "
+        className="w-full min-h-[6 rem] rounded-lg md:text-2xl h-fit p-7 bg-background-dark "
       ></TextareaAutosize>
     </div>
   );

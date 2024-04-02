@@ -5,7 +5,7 @@ import Footer from "@/components/Footer";
 import Share from "@/components/Share";
 export const metadata = {
   title: "Recipie",
-  description: "Vytvářej, prohlížea sdílej recepty s přáteli",
+  description: "Vytvářej, prohlížej a sdílej recepty s přáteli",
 };
 
 export default function RootLayout({
@@ -30,7 +30,6 @@ export default function RootLayout({
           <div className="backdrop-filter min-h-[1440px] backdrop-blur-3xl ">
             <div className="backdrop-filter min-h-[1440px] bg-black backdrop-blur-3xl bg-opacity-5">
               <SessionProvid>
-                <Share></Share>
                 <Navbar></Navbar>
                 <div className="flex justify-center flex-wrap p-10 pb-36">
                   {children}

@@ -34,27 +34,30 @@ export default function Share() {
           className="flex, flex-nowrap w-[256px] h-fit"
         >
           <FacebookShareButton
+            onClick={() => {
+              console.log(`${IP_ADDRESS}:3000${pathname}`);
+            }}
             className="m-[8px] rotate-[-90deg] md:rotate-0"
-            url={`${IP_ADDRESS}//${pathname}`}
+            url={`${IP_ADDRESS}${pathname}`}
             quote="fasf"
           >
             <FacebookIcon size={48}></FacebookIcon>
           </FacebookShareButton>
           <TumblrShareButton
             className="m-[8px] rotate-[-90deg] md:rotate-0"
-            url={`${IP_ADDRESS}//${pathname}`}
+            url={`${IP_ADDRESS}${pathname}`}
           >
             <TumblrIcon size={48}></TumblrIcon>
           </TumblrShareButton>
           <WhatsappShareButton
             className="m-[8px] rotate-[-90deg] md:rotate-0"
-            url={`${IP_ADDRESS}//${pathname}`}
+            url={`${IP_ADDRESS}${pathname}`}
           >
             <WhatsappIcon size={48}></WhatsappIcon>
           </WhatsappShareButton>
           <TwitterShareButton
             className="m-[8px] rotate-[-90deg] md:rotate-0"
-            url={`${IP_ADDRESS}//${pathname}`}
+            url={`${IP_ADDRESS}${pathname}`}
           >
             <TwitterIcon size={48}></TwitterIcon>
           </TwitterShareButton>

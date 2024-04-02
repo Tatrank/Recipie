@@ -13,6 +13,7 @@ export default function Navbar() {
   const [showCategory, setShowCategory] = useState<boolean>(false);
   const [x, setX] = useState(false);
   const router = useRouter();
+  const [search, setSearch] = useState<boolean>(true);
   return (
     <>
       <div className=" z-50 sticky top-0 ml-auto">
@@ -238,7 +239,9 @@ backdrop-filter backdrop-blur-lg bg-opacity-10"
             )}
           </div>
         </div>
-        <SearchBar></SearchBar>
+        <div className="z-40">
+          <SearchBar></SearchBar>
+        </div>
       </div>
     </>
   );

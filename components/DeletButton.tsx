@@ -8,7 +8,7 @@ export default function DeleteButton({ id }: { id: string }) {
   return (
     <div className="w-3/4 h-16 m-8 ">
       <div
-        className="text-5xl flex justify-center items-center h-full w-full rounded-lg bg-accent-light hover:cursor-pointer"
+        className="text-5xl  flex justify-center items-center h-full w-full rounded-lg bg-accent-light hover:cursor-pointer"
         onClick={async () => {
           const deletes = await fetch(
             `http://${IP_ADDRESS}/api/userRecipe?id=${id}`,

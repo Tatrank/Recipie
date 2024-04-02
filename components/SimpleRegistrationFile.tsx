@@ -96,6 +96,7 @@ export function SimpleRegistrationForm() {
             Your Email
           </Typography>
           <Input
+            type="email"
             name="email"
             placeholder="name@mail.com"
             className="rounded-lg h-8 !border-t-blue-gray-200 placeholder-white text-black bg-secondary-dark focus:!border-t-gray-900"
